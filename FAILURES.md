@@ -49,3 +49,8 @@ Each entry: what broke, what I tried, what fixed it. Newest at the bottom. Times
 - **Broke:** web searches turned up only third-party skill listings (STT at `api.addisassistant.com/api/v2/stt`, an `x-api-key` header), not a TTS reference.
 - **Tried:** probed `POST /api/v1/audio` with `{"text", "language": "am"}`. It returned 200 with a base64 44.1 kHz mono WAV in 4.5 s.
 - **Fixed:** `providers.addis_tts` resamples to 24 kHz s16 so both providers feed the same pipeline. Risk noted: an undocumented endpoint can change without notice. Gemini stays in the fallback design.
+
+## F10 - Cloudflare output filter flagged the commander sheet (02:00)
+- **Broke:** `flux-2-klein-4b` returned 400 "Your output has been flagged" (code 3030) for the commander reference sheet, twice, including after I softened the uniform wording. The fallback chain switched to Pollinations, so the stage did not block.
+- **Tried:** probing showed short prompts about the same man pass. The difference was my appended `Avoid: photorealistic, ..., gore, blood` clause.
+- **Fixed:** FLUX models have no negative prompt, so those words are read as content. That trips the safety filter and pushes images toward what I wanted to avoid. The clause is no longer sent; `style.negative` stays in the storyboard as documentation.

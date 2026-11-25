@@ -32,7 +32,9 @@ def expand(sb: dict, text: str) -> str:
 
 
 def full_prompt(sb: dict, body: str) -> str:
-    return f"{expand(sb, body)}. {sb['style']['block']}. Avoid: {sb['style']['negative']}"
+    """FLUX has no negative prompt: words like 'gore, blood' in an 'Avoid:' clause are read as content
+    and tripped Cloudflare's output filter (FAILURES.md F10). style.negative is kept as documentation."""
+    return f"{expand(sb, body)}. {sb['style']['block']}"
 
 
 def shot_seed(sb: dict, shot: dict) -> int:
