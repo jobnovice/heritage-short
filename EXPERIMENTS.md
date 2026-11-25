@@ -69,3 +69,20 @@ the `.meta.json` sidecars under `outputs/`. Times are EAT, 26 Nov 2026.
 ### E10 - Ducking settings
 - Starting point from the brief: threshold 0.02, ratio 6, attack 300 ms, release 1500 ms. Radio cut master: -14.09 LUFS, -1.0 dBTP.
 - [TO RUN: compare release 1500 vs 800 ms by ear on phone + headphones; record the choice.]
+
+### E11 - The whole character sheet works as a reference image
+- **Hypothesis:** passing the full 3-view sheet gives klein the most identity information.
+- **Change:** first full pass (14 images, 114.9 s) with whole sheets as `input_image_0`.
+- **Result:** identity and style held across shots, but the *layout* leaked: s02, s05 and s07 showed two or three copies of the man side by side, like the sheet. The people-free s09 got the intact ship from its s01 style reference.
+- **Decision:** use the sheet's front view only; no whole-image style reference for people-free shots unless a shot names one (`shots[].reference`).
+
+### E12 - Front view vs head-and-shoulders crop as the reference
+- **Hypothesis:** a full-body front view carries identity without the layout problem.
+- **Change:** refs = left third of the sheet (full body), 10 shots regenerated (73.3 s); then refs = top 42% of that crop (head and shoulders), 8 shots regenerated (48.1 s).
+- **Result:** the full-body crop fixed the triplicates but leaked the *pose*: s05 (should sit on a bunk), s07 (face in hands) and s11 (preaching) all became the same stiff standing figure. The head crop kept the face and haircut and freed the pose: s05 sits with the sling, s07 hides his face, s11 has a congregation.
+- **Decision:** head-and-shoulders references (`front_ref`, 0.42 of sheet height).
+
+### E13 - A face reference on shots where no face should show
+- **Hypothesis:** every shot containing the uncle should get his reference.
+- **Result:** the boot-slipping insert (s04) got his face pasted above the boot, and the "seen from behind" pier shot (s08) turned him toward the camera. A face reference forces a face.
+- **Decision:** s04 and s08 carry no character reference (`characters: []`, description still in the prompt). Rerun regenerated exactly those 2 shots, 12 cached (25.5 s). The commander opts out of references entirely (`use_reference: false`) so he stays a generic, shadowed figure (ETHICS).

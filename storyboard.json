@@ -29,6 +29,7 @@
     "commander": {
       "description": "a kind Ethiopian ship captain in his forties with a moustache, dark navy jacket and simple sailor cap, gentle fatherly posture, mostly in soft backlight",
       "seed": 4103,
+      "use_reference": false,
       "real_person": true,
       "consent_ref": "ETHICS.md#commander-not-depicted"
     }
@@ -91,7 +92,7 @@
     {
       "id": "s04", "beat": "Tuesday", "shot_size": "insert", "duration_sec": 5,
       "reason": "The turning point in one image: a boot slipping on wet steel. The smallest moment carries the whole story.",
-      "characters": ["uncle_young"],
+      "characters": [],
       "image_prompt": "close view of a worn black work boot slipping on a wet steel ladder rung inside a ship, water droplets, dramatic low light",
       "motion": {"camera": "tilt_down", "video_prompt": "the boot slides off the rung, droplets scatter", "use_video": false},
       "narration": {"am": "ማክሰኞ ዕለት፣ በመርከቡ ሆድ ውስጥ ሲሠራ፣ እግሩ ተንሸራተተ።", "en": "On Tuesday, working deep in the belly of the ship, his foot slipped."}
@@ -108,7 +109,7 @@
       "id": "s06", "beat": "Tuesday", "shot_size": "medium", "duration_sec": 7,
       "reason": "The commander's care is the hidden mercy; backlit so the commander stays a silhouette, not a likeness.",
       "characters": ["uncle_young", "commander"],
-      "image_prompt": "{commander} standing in a ship doorway, backlit silhouette, resting a hand on the shoulder of {uncle_young} who sits with his arm in a sling",
+      "image_prompt": "a dark backlit silhouette of a ship captain in a bright doorway, his face in shadow and unseen, resting a hand on the shoulder of {uncle_young} who sits with his arm in a sling",
       "motion": {"camera": "static", "video_prompt": "the officer gently squeezes his shoulder, camera fixed", "use_video": false},
       "narration": {"am": "እንደ ልጁ የሚወደው አዛዡ፣ «አንተ እዚሁ ቆይ፤ እረፍ» አለው።", "en": "His commander, who loved him like a son, told him: \"You stay here. Rest.\""}
     },
@@ -123,7 +124,7 @@
     {
       "id": "s08", "beat": "Thursday", "shot_size": "wide", "duration_sec": 6,
       "reason": "The title moment: the ship leaves and he is left on the pier, the sling now visible against the sea.",
-      "characters": ["uncle_young"],
+      "characters": [],
       "image_prompt": "seen from behind, {uncle_young} standing alone on a concrete pier at pale dawn with his arm in a sling, watching a grey navy ship sail away toward the horizon",
       "motion": {"camera": "pull_out", "video_prompt": "the ship moves slowly away, gulls drift, camera pulls back", "use_video": true},
       "narration": {"am": "ሐሙስ ጠዋት፣ መርከቡ ያለ እርሱ ተነሣ።", "en": "On Thursday morning, the ship left without him."}

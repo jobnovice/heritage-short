@@ -20,7 +20,7 @@ from PIL import Image, ImageDraw
 
 from . import providers as P
 from .cards import font
-from .common import (OUT, file_hash, QuotaExhausted, StageReport, ensure_dir, input_hash, is_fresh, load_storyboard,
+from .common import (OUT, ROOT, file_hash, QuotaExhausted, StageReport, ensure_dir, input_hash, is_fresh, load_storyboard,
                      log_run, timed, with_retries, write_meta)
 
 CHAIN = ["cloudflare", "pollinations", "placeholder"]
@@ -104,14 +104,25 @@ def main(argv=None):
     d = ensure_dir(OUT / "keyframes")
     rep = StageReport("keyframes")
 
+    def front_ref(name):
+        """Left third of the sheet (the front view). Passing the whole 3-view sheet made klein draw
+        three copies of the man (EXPERIMENTS E11)."""
+        sheet, ref = d / f"sheet_{name}.png", d / f"ref_{name}.png"
+        if sheet.exists():
+            im = Image.open(sheet)
+            w, h = im.size
+            im.crop((0, 0, w // 3, int(h * 0.42))).save(ref)  # head+shoulders: identity without the pose (E12)
+        return ref
+
     def refs_for(shot):
-        """Character sheets of the people in the shot; establishing shot s01 is the golden style
-        reference for shots with no people, so places share one look."""
+        """Front-view refs of the shot's characters (unless a character opts out, e.g. the commander,
+        who must stay a generic silhouette). People-free shots get a ref only if the shot names one:
+        a whole-image style ref leaked content (the s01 ship appeared in s09)."""
         if shot is None:
             return []
         if shot["characters"]:
-            return [d / f"sheet_{c}.png" for c in shot["characters"][:2]]
-        return [] if shot["id"] == sb["shots"][0]["id"] else [d / f"{sb['shots'][0]['id']}.png"]
+            return [front_ref(c) for c in shot["characters"][:2] if sb["characters"][c].get("use_reference", True)]
+        return [ROOT / shot["reference"]] if shot.get("reference") else []
 
     jobs = []
     for name, c in sb["characters"].items():

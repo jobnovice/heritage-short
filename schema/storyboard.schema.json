@@ -41,6 +41,7 @@
         "properties": {
           "description": {"type": "string", "description": "Fixed description pasted into every prompt that features this character"},
           "seed": {"type": "integer"},
+          "use_reference": {"type": "boolean", "default": true, "description": "false = never pass this character's sheet as a reference image"},
           "real_person": {"type": "boolean", "description": "true if this depicts a real person; requires a consent entry in ETHICS.md"},
           "consent_ref": {"type": "string"}
         }
