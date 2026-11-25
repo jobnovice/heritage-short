@@ -32,3 +32,12 @@ Each entry: what broke, what I tried, what fixed it. Newest at the bottom. Times
 - **Cloudflare `flux-1-schnell` 400: "Additional or unevaluated properties '/seed'".** schnell's schema has no seed, so a keyframe could never be reproduced. Listed the account's models and switched to `@cf/black-forest-labs/flux-2-klein-4b` (Apache 2.0), which takes multipart form data with `seed` and up to four reference images.
 - **Model drift:** the template defaulted to 2.5-era model ids. `make smoke` now prints the model list; the key also exposes the brief's `gemini-3.8-flash` and `gemini-3.8-flash-tts`, now the defaults.
 - **Gemini 503 "high demand"** on `gemini-3.8-flash` during testing: transient, handled by `with_retries`.
+
+## F7 - Gemini TTS reads the style instruction aloud (01:40)
+- **Broke:** 8 of 11 narration takes were 17-19 s regardless of length (s05: 4 words, 17.5 s). An ASR round trip of s05 returned "Read this Amharic narration slowly and warmly... " followed by the Amharic line. The model spoke my English style prefix as part of the narration, on some lines and not others.
+- **Tried 1:** Gemini's documented short form ("Say slowly and warmly, like a nephew telling his family an old story: <text>"). s02 came out clean, but s06 still spoke the prefix (ASR similarity 0.455).
+- **Tried 2 (detection):** (a) a duration guard rejects a take longer than 1.3 s/word + 2 s and retries it; (b) `--verify` transcribes each take with gemini-2.5-flash and scores character similarity to the script. Clean takes score 0.84-0.97, spoken-prefix takes 0.37-0.46. But ASR is not enough on its own: on the old s05 take it *dropped* the English and scored 0.842. The duration guard is the more reliable detector, so I keep both.
+- **Status:** see F8 for the quota wall hit in the same run.
+
+## F8 - Gemini TTS free-tier quota exhausted mid-run (01:45)
+- **Broke:** the regeneration run got HTTP 429 on 9 of 11 lines after 4 attempts each (404 s wall time). Each was logged as a fallback; the old takes were kept and the run did not crash.

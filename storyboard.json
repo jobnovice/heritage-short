@@ -27,7 +27,7 @@
       "consent_ref": "ETHICS.md#consent-uncle"
     },
     "commander": {
-      "description": "an Ethiopian naval officer in his forties, moustache, dark navy officer uniform and peaked cap, mostly in soft backlight",
+      "description": "a kind Ethiopian ship captain in his forties with a moustache, dark navy jacket and simple sailor cap, gentle fatherly posture, mostly in soft backlight",
       "seed": 4103,
       "real_person": true,
       "consent_ref": "ETHICS.md#commander-not-depicted"
@@ -37,7 +37,7 @@
     "provider": "gemini",
     "model": "gemini-3.8-flash-tts",
     "voice_name": "Charon",
-    "style_instruction": "Read this Amharic narration slowly and warmly, like a nephew telling his family a story he has heard many times. Calm, unhurried, gentle pauses at the punctuation:",
+    "style_instruction": "Say slowly and warmly, like a nephew telling his family an old story:",
     "lead_in_sec": 0.5,
     "tail_sec": 0.8
   },
