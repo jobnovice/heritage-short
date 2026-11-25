@@ -40,30 +40,33 @@ def max_plausible_sec(text: str) -> float:
 def synth(sb: dict, text: str, shot_id: str) -> tuple[bytes, dict]:
     v = sb["voice"]
     if v["provider"] == "gemini":
-        model = v.get("model") or P.gemini_tts_model()
+        primary = v.get("model") or P.gemini_tts_model()
+        # free-tier quotas are per model per day (F8): on a daily 429, move down the chain at once
+        chain = [primary] + [m for m in v.get("fallback_models", []) if m != primary]
+        for model in chain:
+            def call(model=model):
+                pcm = P.gemini_tts(text, voice=v["voice_name"], style=v["style_instruction"], model=model)
+                dur = len(pcm) / 2 / SR
+                if dur > max_plausible_sec(text):
+                    log_run(stage="narration", shot=shot_id, provider="gemini", model=model, status="rejected_too_long",
+                            duration_sec=round(dur, 2), max_sec=max_plausible_sec(text), cost_usd=0.0)
+                    raise RetryableError(f"take is {dur:.1f}s, max plausible {max_plausible_sec(text):.1f}s")
+                return pcm
 
-        def call():
-            pcm = P.gemini_tts(text, voice=v["voice_name"], style=v["style_instruction"], model=model)
-            dur = len(pcm) / 2 / SR
-            if dur > max_plausible_sec(text):
-                log_run(stage="narration", shot=shot_id, provider="gemini", model=model, status="rejected_too_long",
-                        duration_sec=round(dur, 2), max_sec=max_plausible_sec(text), cost_usd=0.0)
-                raise RetryableError(f"take is {dur:.1f}s, max plausible {max_plausible_sec(text):.1f}s")
-            return pcm
-
-        with timed() as t:
-            try:
-                pcm = with_retries(call, attempts=4, what=f"tts {shot_id}")
-                status = "ok"
-            except Exception as e:
-                status, pcm = f"error: {e}"[:300], None
-        log_run(stage="narration", shot=shot_id, provider="gemini", model=model,
-                params={"voice": v["voice_name"], "style": v["style_instruction"][:80]}, seed=None,
-                latency_sec=t["sec"], status=status, chars=len(text), cost_usd=0.0,
-                notes="Gemini API free tier")
-        if pcm is None:
-            raise QuotaExhausted(status)
-        return pcm, {"model": model, "latency_sec": t["sec"]}
+            with timed() as t:
+                try:
+                    pcm = with_retries(call, attempts=3, what=f"tts {shot_id} [{model}]")
+                    status = "ok"
+                except Exception as e:
+                    status, pcm = f"error: {e}"[:300], None
+            log_run(stage="narration", shot=shot_id, provider="gemini", model=model,
+                    params={"voice": v["voice_name"], "style": v["style_instruction"][:80]}, seed=None,
+                    latency_sec=t["sec"], status=status, chars=len(text), cost_usd=0.0,
+                    notes="Gemini API free tier" + ("" if model == primary else f"; fallback from {primary}"))
+            if pcm is not None:
+                return pcm, {"model": model, "latency_sec": t["sec"]}
+            print(f"    {shot_id}: {model} unavailable -> next model")
+        raise QuotaExhausted(status)
     if v["provider"] == "addis":
         raise NotImplementedError("Addis AI provider: add the endpoint from their docs in providers.py (see EXPERIMENTS.md)")
     raise ValueError(v["provider"])
@@ -76,7 +79,7 @@ def normalise(t: str) -> str:
 def verify(sb: dict, shot: dict, wav: Path) -> dict:
     """ASR round trip: transcribe the take with Gemini and compare to the script (character similarity).
     A cheap, automatic stand-in for a native-speaker listen; it does not replace one."""
-    model = "gemini-2.5-flash"
+    model = "gemini-3.5-transcribe"
     b64 = base64.b64encode(wav.read_bytes()).decode()
     with timed() as t:
         try:
@@ -87,7 +90,9 @@ def verify(sb: dict, shot: dict, wav: Path) -> dict:
             status = "ok"
         except Exception as e:
             heard, status = "", f"error: {e}"[:200]
-    sim = round(difflib.SequenceMatcher(None, normalise(shot["narration"]["am"]), normalise(heard)).ratio(), 3)
+    sim = round(difflib.SequenceMatcher(None, normalise(shot["narration"]["am"]), normalise(heard)).ratio(), 3) if heard else None
+    if re.search(r"[A-Za-z]{3,}", heard):  # any English words in an Amharic take = spoken instructions
+        sim = min(sim or 0, 0.5)
     log_run(stage="narration_verify", shot=shot["id"], provider="gemini", model=model, latency_sec=t["sec"],
             status=status, similarity=sim, heard=heard[:300], cost_usd=0.0)
     return {"asr_text": heard, "asr_similarity": sim}

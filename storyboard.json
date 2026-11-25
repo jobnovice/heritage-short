@@ -36,8 +36,9 @@
   "voice": {
     "provider": "gemini",
     "model": "gemini-3.8-flash-tts",
+    "fallback_models": ["gemini-3.8-flash-lite-tts", "gemini-2.5-flash-preview-tts"],
     "voice_name": "Charon",
-    "style_instruction": "Say slowly and warmly, like a nephew telling his family an old story:",
+    "style_instruction": "",
     "lead_in_sec": 0.5,
     "tail_sec": 0.8
   },

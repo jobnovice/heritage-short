@@ -53,6 +53,7 @@
       "properties": {
         "provider": {"enum": ["gemini", "addis", "silent"]},
         "model": {"type": "string"},
+        "fallback_models": {"type": "array", "items": {"type": "string"}, "description": "Tried in order when the primary model's daily quota is gone"},
         "voice_name": {"type": "string"},
         "style_instruction": {"type": "string"},
         "lead_in_sec": {"type": "number", "minimum": 0, "default": 0.4},

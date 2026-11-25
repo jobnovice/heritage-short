@@ -54,7 +54,7 @@ def gemini_tts(text: str, *, voice: str, style: str, model: str | None = None) -
     """Returns raw PCM: 24 kHz, 16-bit, mono."""
     model = model or gemini_tts_model()
     body = {
-        "contents": [{"parts": [{"text": f"{style} {text}"}]}],
+        "contents": [{"parts": [{"text": f"{style} {text}" if style else text}]}],  # F7: prefixes get spoken
         "generationConfig": {
             "responseModalities": ["AUDIO"],
             "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig": {"voiceName": voice}}},
