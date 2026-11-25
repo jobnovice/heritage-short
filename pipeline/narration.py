@@ -68,7 +68,17 @@ def synth(sb: dict, text: str, shot_id: str) -> tuple[bytes, dict]:
             print(f"    {shot_id}: {model} unavailable -> next model")
         raise QuotaExhausted(status)
     if v["provider"] == "addis":
-        raise NotImplementedError("Addis AI provider: add the endpoint from their docs in providers.py (see EXPERIMENTS.md)")
+        with timed() as t:
+            try:
+                pcm = with_retries(lambda: P.addis_tts(text), what=f"addis {shot_id}")
+                status = "ok"
+            except Exception as e:
+                status, pcm = f"error: {e}"[:300], None
+        log_run(stage="narration", shot=shot_id, provider="addis", model="addis-ai-tts-v1", seed=None,
+                latency_sec=t["sec"], status=status, chars=len(text), cost_usd=0.0, notes="Addis AI free key")
+        if pcm is None:
+            raise QuotaExhausted(status)
+        return pcm, {"model": "addis-ai-tts-v1", "latency_sec": t["sec"]}
     raise ValueError(v["provider"])
 
 
@@ -103,9 +113,13 @@ def main(argv=None):
     ap.add_argument("--only", nargs="*", help="shot ids to consider")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--verify", action="store_true", help="ASR round-trip check of every take")
+    ap.add_argument("--provider", help="override voice.provider (for A/B experiments)")
+    ap.add_argument("--outdir", default="narration", help="write under outputs/<outdir> (experiments keep the main take untouched)")
     a = ap.parse_args(argv)
     sb = load_storyboard()
-    d = ensure_dir(OUT / "narration")
+    if a.provider:
+        sb["voice"]["provider"] = a.provider
+    d = ensure_dir(OUT / a.outdir)
     rep = StageReport("narration")
     v = sb["voice"]
     for s in sb["shots"]:

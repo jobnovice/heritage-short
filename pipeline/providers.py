@@ -127,3 +127,23 @@ def pollinations_image(prompt: str, *, seed: int, size: int = 1024, model: str =
     if not r.headers.get("content-type", "").startswith("image"):
         raise RetryableError(f"pollinations returned {r.headers.get('content-type')}")
     return r.content
+
+
+def addis_tts(text: str, *, language: str = "am") -> bytes:
+    """Addis AI (Ethiopian Amharic-first model). Endpoint found by probing; no public docs located
+    (FAILURES.md F9). Returns raw PCM 24 kHz s16 mono, resampled from the 44.1 kHz WAV it sends."""
+    import subprocess
+    k = env("ADDIS_AI_API_KEY")
+    if not k:
+        raise QuotaExhausted("ADDIS_AI_API_KEY is not set")
+    r = _post("https://api.addisassistant.com/api/v1/audio", headers={"x-api-key": k},
+              json={"text": text, "language": language}, timeout=120)
+    try:
+        wav = base64.b64decode(r.json()["audio"])
+    except (KeyError, ValueError) as e:
+        raise RetryableError(f"Addis returned no audio: {r.text[:200]}") from e
+    p = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", "pipe:0", "-f", "s16le", "-ac", "1", "-ar", "24000", "pipe:1"],
+                       input=wav, capture_output=True)
+    if p.returncode:
+        raise RuntimeError(p.stderr.decode()[:200])
+    return p.stdout
