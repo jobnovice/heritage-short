@@ -1,10 +1,10 @@
 {
-  "input_hash": "6b54bf00dfefa278",
-  "run_id": "20261125T221529-42a3",
-  "written_at": "2026-11-25T22:15:43+00:00",
-  "provider": "pollinations",
-  "model": "flux",
+  "input_hash": "939901c7b0e9ed2f",
+  "run_id": "20261125T224424-b71c",
+  "written_at": "2026-11-25T22:45:01+00:00",
+  "provider": "cloudflare",
+  "model": "@cf/black-forest-labs/flux-2-klein-4b",
   "seed": 4103,
-  "prompt": "character reference sheet of a kind Ethiopian ship captain in his forties with a moustache, dark navy jacket and simple sailor cap, gentle fatherly posture, mostly in soft backlight, three views side by side: front, three-quarter, profile, neutral plain background, full upper body. hand-painted gouache illustration, visible brush strokes, soft paper grain, muted palette of Red Sea teal, rust red and warm ochre, gentle cinematic light, main subject centered in frame, late 1980s Ethiopia, no text, no lettering. Avoid: photorealistic, photograph, text, letters, watermark, logo, extra fingers, deformed hands, modern objects, gore, blood",
+  "prompt": "character reference sheet of a kind Ethiopian ship captain in his forties with a moustache, dark navy jacket and simple sailor cap, gentle fatherly posture, mostly in soft backlight, three views side by side: front, three-quarter, profile, neutral plain background, full upper body. hand-painted gouache illustration, visible brush strokes, soft paper grain, muted palette of Red Sea teal, rust red and warm ochre, gentle cinematic light, main subject centered in frame, late 1980s Ethiopia, no text, no lettering",
   "refs": []
 }

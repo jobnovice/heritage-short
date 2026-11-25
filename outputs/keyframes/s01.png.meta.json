@@ -1,0 +1,10 @@
+{
+  "input_hash": "6d729bb0d82ed8b3",
+  "run_id": "20261125T224424-b71c",
+  "written_at": "2026-11-25T22:45:09+00:00",
+  "provider": "cloudflare",
+  "model": "@cf/black-forest-labs/flux-2-klein-4b",
+  "seed": 9001,
+  "prompt": "a grey Ethiopian navy patrol ship alone on the Red Sea at dusk, small deck lights, calm dark water, vast sky. hand-painted gouache illustration, visible brush strokes, soft paper grain, muted palette of Red Sea teal, rust red and warm ochre, gentle cinematic light, main subject centered in frame, late 1980s Ethiopia, no text, no lettering",
+  "refs": []
+}
