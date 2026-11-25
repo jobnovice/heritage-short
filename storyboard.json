@@ -247,7 +247,7 @@
       "characters": [
         "uncle_young"
       ],
-      "image_prompt": "{uncle_young} alone in a dark ship cabin at night, face hidden in his good hand, arm in a sling, a single small porthole of blue moonlight",
+      "image_prompt": "{uncle_young} sitting hunched on a bunk in a dark ship cabin at night, head bowed, his face buried in his good hand, his other arm in a white sling, a single small porthole of blue moonlight",
       "motion": {
         "camera": "pull_out",
         "video_prompt": "he stays still, moonlight flickers faintly, slow pull out",
@@ -256,7 +256,8 @@
       "narration": {
         "am": "ልቡ ተሰበረ። ተስፋ ቆረጠ፤ ዓለም ያለቀችበት መሰለው።",
         "en": "His heart broke. He lost all hope; it felt like the end of the world."
-      }
+      },
+      "seed": 4207
     },
     {
       "id": "s08",
@@ -265,7 +266,7 @@
       "duration_sec": 6,
       "reason": "The title moment: the ship leaves and he is left on the pier, the sling now visible against the sea.",
       "characters": [],
-      "image_prompt": "seen from behind, {uncle_young} standing alone on a concrete pier at pale dawn with his arm in a sling, watching a grey navy ship sail away toward the horizon",
+      "image_prompt": "back view, the viewer sees only his back: {uncle_young} standing alone at the end of a concrete pier at pale dawn, his arm in a white sling, facing away toward a single grey navy ship sailing to the horizon",
       "motion": {
         "camera": "pull_out",
         "video_prompt": "the ship moves slowly away, gulls drift, camera pulls back",
@@ -274,7 +275,8 @@
       "narration": {
         "am": "ሐሙስ ጠዋት፣ መርከቡ ያለ እርሱ ተነሣ።",
         "en": "On Thursday morning, the ship left without him."
-      }
+      },
+      "seed": 4208
     },
     {
       "id": "s09",

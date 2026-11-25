@@ -1,10 +1,12 @@
 {
-  "input_hash": "e30f828e4f93df2e",
-  "run_id": "20261125T224424-b71c",
-  "written_at": "2026-11-25T22:44:47+00:00",
+  "input_hash": "2bbc32d4dc568c19",
+  "run_id": "20261125T235724-7ad7",
+  "written_at": "2026-11-25T23:57:44+00:00",
   "provider": "cloudflare",
   "model": "@cf/black-forest-labs/flux-2-klein-4b",
   "seed": 4102,
-  "prompt": "character reference sheet of the same Ethiopian man now in his late fifties, short grey hair, short grey beard, kind eyes, simple white shirt, three views side by side: front, three-quarter, profile, neutral plain background, full upper body. hand-painted gouache illustration, visible brush strokes, soft paper grain, muted palette of Red Sea teal, rust red and warm ochre, gentle cinematic light, main subject centered in frame, late 1980s Ethiopia, no text, no lettering",
-  "refs": []
+  "prompt": "character reference sheet of the same Ethiopian man now in his late fifties, dark brown skin, short grey hair, short grey beard, kind eyes, simple white shirt, three views side by side: front, three-quarter, profile, neutral plain background, full upper body. hand-painted gouache illustration, visible brush strokes, soft paper grain, muted palette of Red Sea teal, rust red and warm ochre, gentle cinematic light, main subject centered in frame, late 1980s Ethiopia, no text, no lettering",
+  "refs": [
+    "ref_uncle_young.png"
+  ]
 }

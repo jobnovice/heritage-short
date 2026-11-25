@@ -1,0 +1,12 @@
+{
+  "input_hash": "cc6dc7461bc64591",
+  "run_id": "20261125T235724-7ad7",
+  "written_at": "2026-11-25T23:58:38+00:00",
+  "provider": "cloudflare",
+  "model": "@cf/black-forest-labs/flux-2-klein-4b",
+  "seed": 4114,
+  "prompt": "the same Ethiopian man now in his late fifties, dark brown skin, short grey hair, short grey beard, kind eyes, simple white shirt preaching with an open hand to a small congregation in a simple bright church, a window behind him shows a calm blue sea. hand-painted gouache illustration, visible brush strokes, soft paper grain, muted palette of Red Sea teal, rust red and warm ochre, gentle cinematic light, main subject centered in frame, late 1980s Ethiopia, no text, no lettering",
+  "refs": [
+    "ref_uncle_now.png"
+  ]
+}

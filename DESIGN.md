@@ -47,6 +47,17 @@ Questions asked: (1) What did you feel at the end? (2) Where did your attention 
 **Insights:** [FILL IN]
 **Changes made to storyboard.json because of test 1** (with commit hashes): [FILL IN]
 
+## Review round 1: first full cut (26 Nov, ~02:30 EAT)
+Feedback relayed to me by the filmmaker from family reviewers. [FILL IN: who (relation), how they watched.]
+
+| Feedback | Change in storyboard.json | Commit |
+|---|---|---|
+| The older uncle (preaching) does not look like the young uncle: his skin is lighter | Both descriptions fix "dark brown skin"; `uncle_now` sheet is now generated *from* `uncle_young`'s face reference (`reference_from`) | `feat(storyboard): review round 1` + keyframe regen |
+| "A random Tuesday and Thursday": no year | s01 now says 1982 E.C. (1989/90) | same |
+| Missing his own turning point: Friday, when he heard the news, is the day he calls his rebirth | New shot s10 "Friday" (radio at the base, sling, first light); old s10/s11 become s11/s12 | same |
+| The film should say why the ship sank | s09 states it was sunk in an attack by Eritrean fighters that same Thursday (I had first left the cause out to stay neutral; the family's telling names it, and it is their story) | same |
+| The narrator should be a man | Gemini `Charon` (median F0 ≈ 150 Hz) replaces the Addis AI default voice (≈ 220 Hz); EXPERIMENTS E14 | `feat(narration): male narrator` |
+
 ## User test 2: near-final cut
 File: `outputs/final/thursday_9x16.mp4`. At least 3 people (they may overlap with test 1).
 
