@@ -1,0 +1,15 @@
+# secrets
+.env
+*.key
+# python
+.venv/
+__pycache__/
+*.pyc
+# generated media is regenerable from storyboard.json; keep metadata (.meta.json) for inspection
+outputs/**/*.wav
+outputs/**/*.mp4
+outputs/**/*.png
+outputs/**/*.jpg
+outputs/**/*.mp3
+!outputs/final/*.mp4
+.DS_Store
