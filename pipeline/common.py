@@ -101,6 +101,11 @@ def file_hash(path: Path) -> str:
     return h.hexdigest()[:16]
 
 
+def code_hash(*modules) -> str:
+    """Code is an input too: hashing a stage's source means a renderer fix invalidates its outputs."""
+    return input_hash(*[file_hash(Path(m.__file__)) for m in modules])
+
+
 def meta_path(out: Path) -> Path:
     return out.with_suffix(out.suffix + ".meta.json")
 

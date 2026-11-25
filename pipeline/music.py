@@ -16,12 +16,13 @@ from __future__ import annotations
 
 import argparse
 import shutil
+import sys
 import wave
 from pathlib import Path
 
 import numpy as np
 
-from .common import (OUT, ROOT, StageReport, ensure_dir, input_hash, is_fresh, load_storyboard, log_run,
+from .common import (OUT, ROOT, code_hash, StageReport, ensure_dir, input_hash, is_fresh, load_storyboard, log_run,
                      shot_timing, timed, write_meta)
 
 SR = 44100
@@ -154,7 +155,7 @@ def main(argv=None):
         return
     score_out, sea_out = d / "score.wav", d / "sea.wav"
     if m["provider"] == "qenet":
-        h = input_hash("qenet-v1", m, timing)
+        h = input_hash("qenet-v1", code_hash(sys.modules[__name__]), m, timing)
         if is_fresh(score_out, h):
             rep.hit("score")
         else:
