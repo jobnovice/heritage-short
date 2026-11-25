@@ -1,6 +1,6 @@
 # One command from a clean clone:  make setup && make film
 PY := .venv/bin/python
-.PHONY: setup smoke validate script narration keyframes sheets shots music radio film plan clean
+.PHONY: setup smoke validate script narration keyframes sheets shots music radio film plan clean costs
 
 setup:            ## create venv and install deps (needs python3 + ffmpeg on PATH)
 	python3 -m venv .venv && $(PY) -m pip install -q -r requirements.txt
@@ -35,3 +35,6 @@ film: shots music        ## the whole pipeline; only changed shots regenerate
 
 clean:            ## delete generated media (keeps runs.jsonl)
 	rm -rf outputs/narration outputs/keyframes outputs/shots outputs/music outputs/edit
+
+costs:            ## regenerate the measured tables in COSTS.md from runs.jsonl
+	$(PY) -m pipeline.costs
