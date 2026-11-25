@@ -14,11 +14,11 @@ GEMINI = "https://generativelanguage.googleapis.com/v1beta/models"
 
 
 def gemini_text_model() -> str:
-    return env("GEMINI_TEXT_MODEL", "gemini-2.5-flash")
+    return env("GEMINI_TEXT_MODEL", "gemini-3.8-flash")
 
 
 def gemini_tts_model() -> str:
-    return env("GEMINI_TTS_MODEL", "gemini-2.5-flash-preview-tts")
+    return env("GEMINI_TTS_MODEL", "gemini-3.8-flash-tts")
 
 
 def _gemini_key() -> str:
@@ -40,7 +40,8 @@ def _post(url, **kw):
 def gemini_text(prompt: str, *, model: str | None = None, max_tokens: int = 2048, temperature: float = 0.7,
                 json_mode: bool = False) -> str:
     model = model or gemini_text_model()
-    cfg = {"maxOutputTokens": max_tokens, "temperature": temperature}
+    # thinking tokens count against maxOutputTokens: a 20-token budget returned "" (FAILURES.md F6)
+    cfg = {"maxOutputTokens": max_tokens, "temperature": temperature, "thinkingConfig": {"thinkingBudget": 0}}
     if json_mode:
         cfg["responseMimeType"] = "application/json"
     r = _post(f"{GEMINI}/{model}:generateContent", params={"key": _gemini_key()},
@@ -67,14 +68,29 @@ def gemini_tts(text: str, *, voice: str, style: str, model: str | None = None) -
     return base64.b64decode(data)
 
 
-def cloudflare_image(prompt: str, *, seed: int, steps: int = 4,
-                     model: str = "@cf/black-forest-labs/flux-1-schnell") -> bytes:
+def cloudflare_image(prompt: str, *, seed: int, steps: int = 4, size: int = 1024, refs: list | None = None,
+                     model: str = "@cf/black-forest-labs/flux-2-klein-4b") -> bytes:
+    """FLUX.2 models take multipart form data and up to 4 reference images (input_image_0..3);
+    FLUX.1 schnell takes JSON and rejects a seed (see FAILURES.md F6)."""
     acct, tok = env("CLOUDFLARE_ACCOUNT_ID"), env("CLOUDFLARE_API_TOKEN")
     if not (acct and tok):
         raise QuotaExhausted("Cloudflare credentials not set")
-    r = _post(f"https://api.cloudflare.com/client/v4/accounts/{acct}/ai/run/{model}",
-              headers={"Authorization": f"Bearer {tok}"},
-              json={"prompt": prompt, "seed": seed, "steps": steps})
+    url = f"https://api.cloudflare.com/client/v4/accounts/{acct}/ai/run/{model}"
+    hdr = {"Authorization": f"Bearer {tok}"}
+    if "flux-2" in model:
+        import io
+        from PIL import Image
+        files = {"prompt": (None, prompt), "width": (None, str(size)), "height": (None, str(size)),
+                 "seed": (None, str(seed))}
+        for i, ref in enumerate((refs or [])[:4]):
+            b = io.BytesIO()
+            im = Image.open(ref).convert("RGB")
+            im.thumbnail((768, 768))
+            im.save(b, "JPEG", quality=90)
+            files[f"input_image_{i}"] = (f"ref{i}.jpg", b.getvalue(), "image/jpeg")
+        r = _post(url, headers=hdr, files=files)
+    else:
+        r = _post(url, headers=hdr, json={"prompt": prompt, "steps": steps})
     j = r.json()
     if not j.get("success", True):
         msg = str(j.get("errors"))
@@ -84,14 +100,29 @@ def cloudflare_image(prompt: str, *, seed: int, steps: int = 4,
     return base64.b64decode(j["result"]["image"])
 
 
+_POLL_LAST = [0.0]
+POLL_GAP = 46.0  # measured free limit: 1 image / 45 s / IP (HTTP 402 FREE_LIMIT), see FAILURES.md F5
+
+
 def pollinations_image(prompt: str, *, seed: int, size: int = 1024, model: str = "flux") -> bytes:
-    """Free, keyless FLUX endpoint. Prompts are sent to a third party: keep private details out."""
+    """Free, keyless FLUX endpoint. Prompts are sent to a third party: keep private details out.
+    Self-throttles to the measured free limit instead of burning retries on 402s."""
+    wait = POLL_GAP - (time.time() - _POLL_LAST[0])
+    if wait > 0:
+        print(f"    pollinations: throttling {wait:.0f}s (free tier 1 img/45s)")
+        time.sleep(wait)
+    _POLL_LAST[0] = time.time()
     url = "https://image.pollinations.ai/prompt/" + urllib.parse.quote(prompt)
     try:
         r = requests.get(url, params={"width": size, "height": size, "seed": seed, "model": model,
                                       "nologo": "true", "private": "true"}, timeout=180)
     except (requests.Timeout, requests.ConnectionError) as e:
         raise RetryableError(f"network: {e}") from e
+    if r.status_code == 402 and "FREE_LIMIT" in r.text:
+        import re
+        m = re.search(r"Retry after (\d+)s", r.text)
+        time.sleep(int(m.group(1)) + 2 if m else POLL_GAP)
+        raise RetryableError("402 FREE_LIMIT")
     classify_http(r)
     if not r.headers.get("content-type", "").startswith("image"):
         raise RetryableError(f"pollinations returned {r.headers.get('content-type')}")

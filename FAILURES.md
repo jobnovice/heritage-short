@@ -25,3 +25,10 @@ Each entry: what broke, what I tried, what fixed it. Newest at the bottom. Times
 - **Tried:** blind retries (3 x backoff 2/4/8 s) are shorter than the 45 s window, so all three failed.
 - **Fixed:** provider self-throttles to one call per 46 s and honours the `Retry after Ns` in the 402 body. Rerun: 3/3 sheets, but 487 s wall time for 3 images.
 - **Still wrong:** `nologo=true` is ignored (pollinations.ai watermark in the corner), the gouache style block is ignored (results look like 3D renders), and the commander sheet shows three different men. Decision: move keyframes to Cloudflare Workers AI FLUX (the brief's route); Pollinations stays as the second link in the fallback chain.
+
+## F6 - First keyed smoke test: 3 of 5 checks failed (01:20)
+- **Gemini text returned an empty string.** `gemini-2.5-flash` spent the 20-token `maxOutputTokens` on hidden thinking. Fix: `thinkingConfig.thinkingBudget = 0` for these short, structured calls.
+- **Gemini TTS `finishReason: OTHER`, no audio** for the one-word input "ሰላም". The same call with a full Amharic sentence works on both `gemini-3.8-flash-tts` and `gemini-2.5-flash-preview-tts`. Very short inputs are not a valid smoke test for TTS.
+- **Cloudflare `flux-1-schnell` 400: "Additional or unevaluated properties '/seed'".** schnell's schema has no seed, so a keyframe could never be reproduced. Listed the account's models and switched to `@cf/black-forest-labs/flux-2-klein-4b` (Apache 2.0), which takes multipart form data with `seed` and up to four reference images.
+- **Model drift:** the template defaulted to 2.5-era model ids. `make smoke` now prints the model list; the key also exposes the brief's `gemini-3.8-flash` and `gemini-3.8-flash-tts`, now the defaults.
+- **Gemini 503 "high demand"** on `gemini-3.8-flash` during testing: transient, handled by `with_retries`.

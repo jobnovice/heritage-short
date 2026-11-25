@@ -9,8 +9,8 @@
   "style": {
     "block": "hand-painted gouache illustration, visible brush strokes, soft paper grain, muted palette of Red Sea teal, rust red and warm ochre, gentle cinematic light, main subject centered in frame, late 1980s Ethiopia, no text, no lettering",
     "negative": "photorealistic, photograph, text, letters, watermark, logo, extra fingers, deformed hands, modern objects, gore, blood",
-    "keyframe_provider": "pollinations",
-    "keyframe_model": "flux",
+    "keyframe_provider": "cloudflare",
+    "keyframe_model": "@cf/black-forest-labs/flux-2-klein-4b",
     "keyframe_size": 1024
   },
   "characters": {
@@ -35,6 +35,7 @@
   },
   "voice": {
     "provider": "gemini",
+    "model": "gemini-3.8-flash-tts",
     "voice_name": "Charon",
     "style_instruction": "Read this Amharic narration slowly and warmly, like a nephew telling his family a story he has heard many times. Calm, unhurried, gentle pauses at the punctuation:",
     "lead_in_sec": 0.5,
