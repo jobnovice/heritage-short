@@ -86,3 +86,9 @@ the `.meta.json` sidecars under `outputs/`. Times are EAT, 26 Nov 2026.
 - **Hypothesis:** every shot containing the uncle should get his reference.
 - **Result:** the boot-slipping insert (s04) got his face pasted above the boot, and the "seen from behind" pier shot (s08) turned him toward the camera. A face reference forces a face.
 - **Decision:** s04 and s08 carry no character reference (`characters: []`, description still in the prompt). Rerun regenerated exactly those 2 shots, 12 cached (25.5 s). The commander opts out of references entirely (`use_reference: false`) so he stays a generic, shadowed figure (ETHICS).
+
+### E14 - A male narrator: Addis AI voice options vs Gemini Charon
+- **Hypothesis (from review):** the family expects a man's voice for a story told by a nephew about his uncle.
+- **Change:** probed Addis AI with `gender`, `voice`, `speaker` = male (all silently ignored) and `voice_id` (a real parameter: "Voice male was not found for language am"; no voice-list route exists). Switched to Gemini `Charon`, with `gemini-3.1-flash-tts-preview` as the first fallback because it still had daily quota.
+- **Result (measured pitch, median F0 by autocorrelation):** Addis default ≈ 216-228 Hz (female range); Charon 131-179 Hz, median ≈ 150 Hz (male range). All 12 lines from one model, so the voice is consistent. ASR similarity 0.89-0.96 on clean lines; s01 scores 0.75 only because ASR writes "1982" as digits where the script spells it out.
+- **Decision:** Gemini Charon narrates. Addis AI stays as a provider and in the comparison (E6).
