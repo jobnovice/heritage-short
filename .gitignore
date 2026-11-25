@@ -11,5 +11,4 @@ outputs/**/*.mp4
 outputs/**/*.png
 outputs/**/*.jpg
 outputs/**/*.mp3
-!outputs/final/*.mp4
 .DS_Store
