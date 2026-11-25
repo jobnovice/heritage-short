@@ -34,7 +34,7 @@
     }
   },
   "voice": {
-    "provider": "gemini",
+    "provider": "addis",
     "model": "gemini-3.8-flash-tts",
     "fallback_models": ["gemini-3.8-flash-lite-tts", "gemini-2.5-flash-preview-tts"],
     "voice_name": "Charon",

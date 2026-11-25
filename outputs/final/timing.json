@@ -3,77 +3,77 @@
     "id": "s01",
     "start": 0.0,
     "duration": 6,
-    "narration_sec": 0.0,
+    "narration_sec": 4.23,
     "voice_at": 0.5
   },
   {
     "id": "s02",
     "start": 6.0,
     "duration": 6,
-    "narration_sec": 0.0,
+    "narration_sec": 3.06,
     "voice_at": 6.5
   },
   {
     "id": "s03",
     "start": 12.0,
     "duration": 7,
-    "narration_sec": 0.0,
+    "narration_sec": 4.82,
     "voice_at": 12.5
   },
   {
     "id": "s04",
     "start": 19.0,
-    "duration": 5,
-    "narration_sec": 0.0,
+    "duration": 5.79,
+    "narration_sec": 4.49,
     "voice_at": 19.5
   },
   {
     "id": "s05",
-    "start": 24.0,
+    "start": 24.79,
     "duration": 5,
-    "narration_sec": 0.0,
-    "voice_at": 24.5
+    "narration_sec": 3.12,
+    "voice_at": 25.29
   },
   {
     "id": "s06",
-    "start": 29.0,
+    "start": 29.79,
     "duration": 7,
-    "narration_sec": 0.0,
-    "voice_at": 29.5
+    "narration_sec": 4.03,
+    "voice_at": 30.29
   },
   {
     "id": "s07",
-    "start": 36.0,
+    "start": 36.79,
     "duration": 6,
-    "narration_sec": 0.0,
-    "voice_at": 36.5
+    "narration_sec": 3.92,
+    "voice_at": 37.29
   },
   {
     "id": "s08",
-    "start": 42.0,
+    "start": 42.79,
     "duration": 6,
-    "narration_sec": 0.0,
-    "voice_at": 42.5
+    "narration_sec": 2.41,
+    "voice_at": 43.29
   },
   {
     "id": "s09",
-    "start": 48.0,
+    "start": 48.79,
     "duration": 7,
-    "narration_sec": 0.0,
-    "voice_at": 48.5
+    "narration_sec": 4.01,
+    "voice_at": 49.29
   },
   {
     "id": "s10",
-    "start": 55.0,
+    "start": 55.79,
     "duration": 7,
-    "narration_sec": 0.0,
-    "voice_at": 55.5
+    "narration_sec": 3.49,
+    "voice_at": 56.29
   },
   {
     "id": "s11",
-    "start": 62.0,
+    "start": 62.79,
     "duration": 8,
-    "narration_sec": 0.0,
-    "voice_at": 62.5
+    "narration_sec": 4.27,
+    "voice_at": 63.29
   }
 ]
