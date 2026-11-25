@@ -1,0 +1,5 @@
+{"ts": "2026-11-25T21:42:46+00:00", "run_id": "20261125T214246-689f", "stage": "smoke", "provider": "gemini:list_models", "status": "error", "latency_sec": 0.0, "notes": "GEMINI_API_KEY missing"}
+{"ts": "2026-11-25T21:42:46+00:00", "run_id": "20261125T214246-689f", "stage": "smoke", "provider": "gemini:text", "status": "error", "latency_sec": 0.0, "notes": "GEMINI_API_KEY is not set"}
+{"ts": "2026-11-25T21:42:46+00:00", "run_id": "20261125T214246-689f", "stage": "smoke", "provider": "gemini:tts", "status": "error", "latency_sec": 0.0, "notes": "GEMINI_API_KEY is not set"}
+{"ts": "2026-11-25T21:42:46+00:00", "run_id": "20261125T214246-689f", "stage": "smoke", "provider": "cloudflare:flux", "status": "error", "latency_sec": 0.0, "notes": "CLOUDFLARE_ACCOUNT_ID / CLOUDFLARE_API_TOKEN missing (keyframes will use pollinations)"}
+{"ts": "2026-11-25T21:42:53+00:00", "run_id": "20261125T214246-689f", "stage": "smoke", "provider": "pollinations:flux", "status": "ok", "latency_sec": 7.721, "notes": "13589 bytes image"}
