@@ -21,16 +21,17 @@
   },
   "characters": {
     "uncle_young": {
-      "description": "a slim Ethiopian man in his early twenties, short cropped black hair, warm brown skin, clean-shaven, light blue navy work shirt with rolled sleeves, dark navy trousers",
+      "description": "a slim Ethiopian man in his early twenties, dark brown skin, short cropped black hair, clean-shaven, light blue navy work shirt with rolled sleeves, dark navy trousers",
       "seed": 4101,
       "real_person": true,
       "consent_ref": "ETHICS.md#consent-uncle"
     },
     "uncle_now": {
-      "description": "the same Ethiopian man now in his late fifties, short grey hair, short grey beard, kind eyes, simple white shirt",
+      "description": "the same Ethiopian man now in his late fifties, dark brown skin, short grey hair, short grey beard, kind eyes, simple white shirt",
       "seed": 4102,
       "real_person": true,
-      "consent_ref": "ETHICS.md#consent-uncle"
+      "consent_ref": "ETHICS.md#consent-uncle",
+      "reference_from": "uncle_young"
     },
     "commander": {
       "description": "a kind Ethiopian ship captain in his forties with a moustache, dark navy jacket and simple sailor cap, gentle fatherly posture, mostly in soft backlight",
@@ -41,9 +42,10 @@
     }
   },
   "voice": {
-    "provider": "addis",
+    "provider": "gemini",
     "model": "gemini-3.8-flash-tts",
     "fallback_models": [
+      "gemini-3.1-flash-tts-preview",
       "gemini-3.8-flash-lite-tts",
       "gemini-2.5-flash-preview-tts"
     ],
@@ -99,7 +101,7 @@
         "starts_at_shot": "s10",
         "mode": "bati_major",
         "intensity": 0.55,
-        "purpose": "Grace: the Massawa theme returns, transformed into a brighter mode."
+        "purpose": "Rebirth (Friday) and grace: the Massawa theme returns, transformed into a brighter mode."
       }
     ],
     "duck": {
@@ -126,7 +128,7 @@
       "beat": "Prologue",
       "shot_size": "extreme_wide",
       "duration_sec": 6,
-      "reason": "Establishing shot: tells us where (the Red Sea), when (the Derg era) and that the sea is the second character.",
+      "reason": "Establishing shot: tells us where (the Red Sea), when (1982 E.C., the last years of the Derg) and that the sea is the second character.",
       "characters": [],
       "image_prompt": "a grey Ethiopian navy patrol ship alone on the Red Sea at dusk, small deck lights, calm dark water, vast sky",
       "motion": {
@@ -135,8 +137,8 @@
         "use_video": false
       },
       "narration": {
-        "am": "ይህ የአጎቴ ታሪክ ነው። በደርግ ዘመን፣ የባሕር ኃይል መርከበኛ ነበር።",
-        "en": "This is my uncle's story. In the Derg years, he was a sailor in the navy."
+        "am": "ይህ የአጎቴ ታሪክ ነው። በሺህ ዘጠኝ መቶ ሰማንያ ሁለት ዓመተ ምሕረት፣ የኢትዮጵያ ባሕር ኃይል መርከበኛ ነበር።",
+        "en": "This is my uncle's story. In 1982 E.C. (1989/90), he was a sailor in the Ethiopian Navy."
       }
     },
     {
@@ -276,10 +278,10 @@
     },
     {
       "id": "s09",
-      "beat": "The loss",
+      "beat": "Thursday",
       "shot_size": "extreme_wide",
       "duration_sec": 7,
-      "reason": "The loss shown at a distance and in silence: smoke on the horizon, no violence on screen, respect for everyone lost.",
+      "reason": "The loss, stated plainly (an attack by Eritrean fighters) but shown at a distance: smoke on the horizon, no violence on screen.",
       "characters": [],
       "image_prompt": "an empty dark sea at night, a thin column of smoke and a faint orange glow far away on the horizon, stars, overwhelming stillness",
       "motion": {
@@ -288,12 +290,32 @@
         "use_video": true
       },
       "narration": {
-        "am": "ተመልሶ አልመጣም። ጓደኞቹም፣ አዛዡም፣ በባሕሩ ቀሩ።",
-        "en": "It never came back. His comrades, and his commander, stayed with the sea."
+        "am": "በዚያው ሐሙስ፣ የኤርትራ ተዋጊዎች ባደረሱት ጥቃት መርከቡ ሰጠመ። ጓደኞቹም አዛዡም በባሕሩ ቀሩ።",
+        "en": "That same Thursday, an attack by Eritrean fighters sank the ship. His comrades and his commander stayed with the sea."
       }
     },
     {
       "id": "s10",
+      "beat": "Friday",
+      "shot_size": "medium_close",
+      "duration_sec": 7,
+      "reason": "The real turning point in his own telling: Friday, when the news reached him, is the day he says he was born again.",
+      "characters": [
+        "uncle_young"
+      ],
+      "image_prompt": "{uncle_young} with his arm in a white sling, sitting alone on a bench at a naval base at early morning, holding a small transistor radio to his ear, stunned, eyes wet, first sunlight on his face",
+      "motion": {
+        "camera": "push_in",
+        "video_prompt": "he lowers the radio slowly, sunlight grows, gentle push in",
+        "use_video": true
+      },
+      "narration": {
+        "am": "ዓርብ ዕለት ዜናውን ሰማ። ያንን ቀን፣ ዳግም የተወለደበት ቀን ይለዋል።",
+        "en": "On Friday, he heard the news. He calls it the day he was born again."
+      }
+    },
+    {
+      "id": "s11",
       "beat": "Today",
       "shot_size": "close",
       "duration_sec": 7,
@@ -313,7 +335,7 @@
       }
     },
     {
-      "id": "s11",
+      "id": "s12",
       "beat": "Today",
       "shot_size": "medium",
       "duration_sec": 8,

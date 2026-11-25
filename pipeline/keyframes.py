@@ -120,6 +120,9 @@ def main(argv=None):
         a whole-image style ref leaked content (the s01 ship appeared in s09)."""
         if shot is None:
             return []
+        if "_sheet_of" in shot:  # an older self is drawn from the younger self's face (review: skin tone drifted)
+            src = sb["characters"][shot["_sheet_of"]].get("reference_from")
+            return [front_ref(src)] if src else []
         if shot["characters"]:
             return [front_ref(c) for c in shot["characters"][:2] if sb["characters"][c].get("use_reference", True)]
         return [ROOT / shot["reference"]] if shot.get("reference") else []
@@ -128,7 +131,7 @@ def main(argv=None):
     for name, c in sb["characters"].items():
         body = (f"character reference sheet of {c['description']}, three views side by side: front, three-quarter, "
                 f"profile, neutral plain background, full upper body")
-        jobs.append((f"sheet_{name}", body, c["seed"], None))
+        jobs.append((f"sheet_{name}", body, c["seed"], {"_sheet_of": name}))
     if not a.sheets_only:
         for s in sb["shots"]:
             jobs.append((s["id"], s["image_prompt"], shot_seed(sb, s), s))

@@ -41,6 +41,7 @@
         "properties": {
           "description": {"type": "string", "description": "Fixed description pasted into every prompt that features this character"},
           "seed": {"type": "integer"},
+          "reference_from": {"type": "string", "description": "Generate this character's sheet conditioned on another character's face reference (e.g. the same person at another age)"},
           "use_reference": {"type": "boolean", "default": true, "description": "false = never pass this character's sheet as a reference image"},
           "real_person": {"type": "boolean", "description": "true if this depicts a real person; requires a consent entry in ETHICS.md"},
           "consent_ref": {"type": "string"}
