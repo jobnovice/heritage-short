@@ -43,16 +43,16 @@
   },
   "voice": {
     "provider": "gemini",
-    "model": "gemini-3.1-flash-tts-preview",
+    "model": "gemini-3.8-flash-tts",
     "fallback_models": [
-      "gemini-3.8-flash-tts",
       "gemini-3.8-flash-lite-tts",
-      "gemini-2.5-flash-preview-tts"
+      "gemini-3.1-flash-tts-preview"
     ],
     "voice_name": "Charon",
     "style_instruction": "",
     "lead_in_sec": 0.4,
-    "tail_sec": 0.5
+    "tail_sec": 0.5,
+    "take": "single"
   },
   "music": {
     "provider": "qenet",
@@ -182,14 +182,16 @@
     {
       "id": "s04",
       "beat": "Tuesday",
-      "shot_size": "insert",
+      "shot_size": "medium",
       "duration_sec": 5,
-      "reason": "The turning point in one image: a boot slipping on wet steel. The smallest moment carries the whole story.",
-      "characters": [],
-      "image_prompt": "close view of a worn black work boot slipping on a wet steel ladder rung inside a ship, water droplets, dramatic low light",
+      "reason": "The turning point in one image: he falls. User test 2: a lone boot didn't read as him falling, so the shot now shows the whole man going down.",
+      "characters": [
+        "uncle_young"
+      ],
+      "image_prompt": "{uncle_young} falling backwards inside a ship's narrow steel corridor, one foot slipping off a wet ladder rung, body tilted in mid-fall, arms flung out, startled face clearly visible, water on the steel floor, dramatic low light, single figure",
       "motion": {
         "camera": "tilt_down",
-        "video_prompt": "the boot slides off the rung, droplets scatter",
+        "video_prompt": "his foot slides off the rung and he falls, droplets scatter",
         "use_video": false
       },
       "narration": {
@@ -301,11 +303,11 @@
       "beat": "Friday",
       "shot_size": "medium_close",
       "duration_sec": 7,
-      "reason": "The real turning point in his own telling: Friday, when the news reached him, is the day he says he was born again.",
+      "reason": "The real turning point in his own telling: Friday, when the news reached him, is the day he says he was born again. User test 2: an earlier image gave him two radios, one at each ear; the prompt now names one radio, one hand.",
       "characters": [
         "uncle_young"
       ],
-      "image_prompt": "{uncle_young} with his arm in a white sling, sitting alone on a bench at a naval base at early morning, holding a small transistor radio to his ear, stunned, eyes wet, first sunlight on his face",
+      "image_prompt": "{uncle_young} with his right arm in a white sling, sitting alone on a bench at a naval base at early morning, holding one single small transistor radio in his left hand against his left ear, only one radio in the picture, stunned, eyes wet, first sunlight on his face",
       "motion": {
         "camera": "push_in",
         "video_prompt": "he lowers the radio slowly, sunlight grows, gentle push in",

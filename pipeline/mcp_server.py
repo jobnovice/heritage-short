@@ -52,7 +52,7 @@ def plan() -> dict:
     if errs:
         return {"valid": False, "errors": errs}
     res = PL.plan(sb)
-    calls = sum(1 for st in ("narration", "keyframes") for v in res[st].values() if v.startswith("regenerate"))
+    calls = PL.model_calls(sb, res)
     changed = {st: {k: v for k, v in res[st].items() if v != "cached"} for st in ("narration", "keyframes", "shots")}
     return {"valid": True, "model_calls": calls, "changed": changed, "music": res["music"], "edit": res["edit"]}
 

@@ -20,7 +20,8 @@ def plan(sb: dict) -> dict:
     res = {"narration": {}, "keyframes": {}, "shots": {}, "music": None, "edit": None}
     for s in sb["shots"]:
         out = OUT / "narration" / f"{s['id']}.wav"
-        res["narration"][s["id"]] = "cached" if is_fresh(out, N.narration_key(sb, s)) else "regenerate"
+        res["narration"][s["id"]] = "cached" if is_fresh(out, N.narration_key(sb, s)) else (
+            "regenerate (shared single take)" if sb["voice"].get("take") == "single" else "regenerate")
 
     stale_refs = set()
     for key, body, seed, shot in K.jobs(sb):
@@ -54,16 +55,21 @@ def plan(sb: dict) -> dict:
     return res
 
 
+def model_calls(sb: dict, res: dict) -> int:
+    """Keyframes: one call each. Narration: one per line, or one in total for a single take."""
+    narr = [v for v in res["narration"].values() if v.startswith("regenerate")]
+    n = (1 if narr else 0) if sb["voice"].get("take") == "single" else len(narr)
+    return n + sum(1 for v in res["keyframes"].values() if v.startswith("regenerate"))
+
+
 def main():
     sb = load_storyboard()
     res = plan(sb)
-    calls = 0
+    calls = model_calls(sb, res)
     for stage in ("narration", "keyframes", "shots"):
         print(f"\n{stage}:")
         for k, v in res[stage].items():
             c = G if v == "cached" else (Y if v.startswith("maybe") else R)
-            if v.startswith("regenerate") and stage != "shots":
-                calls += 1
             print(f"  {c}{'=' if v == 'cached' else '~' if v.startswith('maybe') else '+'} {k:<20} {v}{D}")
     print(f"\nmusic: {res['music']}\nedit:  {res['edit']}")
     print(f"\nPlan: {calls} model call(s) would be made. Nothing has been called.")
