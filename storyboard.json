@@ -51,8 +51,8 @@
     ],
     "voice_name": "Charon",
     "style_instruction": "",
-    "lead_in_sec": 0.5,
-    "tail_sec": 0.8
+    "lead_in_sec": 0.4,
+    "tail_sec": 0.5
   },
   "music": {
     "provider": "qenet",
@@ -112,7 +112,7 @@
     }
   },
   "end_card": {
-    "duration_sec": 4,
+    "duration_sec": 3.5,
     "lines_am": [
       "ላልተመለሱት ጓደኞቹ መታሰቢያ",
       "ምስሎቹ፣ ድምፁና ሙዚቃው በAI የተሠሩ ናቸው"

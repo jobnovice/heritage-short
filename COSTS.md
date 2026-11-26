@@ -7,25 +7,27 @@ The table below is generated from `runs.jsonl` by `make costs`; do not edit it b
 <!-- AUTO:START -->
 | stage | provider | model | calls | ok | errors | median latency s | total s | GPU min | list-price USD |
 |---|---|---|---|---|---|---|---|---|---|
-| assemble | ffmpeg | mix | 3 | 3 | 0 | 23.53 | 61.4 | 0.0 | 0.0000 |
-| assemble | ffmpeg | render | 3 | 3 | 0 | 15.32 | 41.7 | 0.0 | 0.0000 |
+| assemble | ffmpeg | mix | 5 | 5 | 0 | 23.56 | 116.6 | 0.0 | 0.0000 |
+| assemble | ffmpeg | render | 9 | 9 | 0 | 90.14 | 637.6 | 0.0 | 0.0000 |
 | keyframes | cloudflare | @cf/black-forest-labs/flux-1-schnell | 2 | 0 | 2 | 0.00 | 0.0 | 0.0 | 0.0000 |
-| keyframes | cloudflare | @cf/black-forest-labs/flux-2-klein-4b | 16 | 14 | 2 | 8.26 | 145.3 | 0.0 | 0.0154 |
+| keyframes | cloudflare | @cf/black-forest-labs/flux-2-klein-4b | 50 | 48 | 2 | 6.64 | 392.4 | 0.0 | 0.0528 |
 | keyframes | pollinations | flux | 8 | 6 | 2 | 3.06 | 499.9 | 0.0 | 0.0000 |
-| music | qenet | qenet-composer-v1 | 2 | 2 | 0 | 5.64 | 11.3 | 0.0 | 0.0000 |
+| music | qenet | qenet-composer-v1 | 4 | 4 | 0 | 5.90 | 23.1 | 0.0 | 0.0000 |
 | narration | addis | addis-ai-tts-v1 | 22 | 22 | 0 | 3.91 | 88.5 | 0.0 | 0.0000 |
-| narration | gemini | gemini-3.8-flash-tts | 43 | 13 | 30 | 17.91 | 804.0 | 0.0 | 0.0195 |
+| narration | gemini | gemini-3.8-flash-tts | 55 | 13 | 42 | 17.88 | 1018.5 | 0.0 | 0.0195 |
 | narration | gemini | gemini-3.8-flash-lite-tts | 26 | 6 | 20 | 17.98 | 319.0 | 0.0 | 0.0090 |
 | narration | gemini | gemini-2.5-flash-preview-tts | 14 | 9 | 5 | 6.86 | 150.0 | 0.0 | 0.0135 |
+| narration | gemini | gemini-3.1-flash-tts-preview | 12 | 12 | 0 | 5.79 | 87.2 | 0.0 | 0.0180 |
 | narration_verify | gemini | gemini-2.5-flash | 22 | 18 | 4 | 3.88 | 85.1 | 0.0 | 0.0036 |
-| narration_verify | gemini | gemini-3.5-transcribe | 22 | 14 | 8 | 2.80 | 53.2 | 0.0 | 0.0028 |
+| narration_verify | gemini | gemini-3.5-transcribe | 34 | 20 | 14 | 2.71 | 80.9 | 0.0 | 0.0040 |
+| shots | ffmpeg | zoompan | 31 | 31 | 0 | 4.13 | 119.9 | 0.0 | 0.0000 |
 
-Total logged model/tool calls: 183 (+17 stage summaries). Actual spend: $0.00 (all free tiers).
+Total logged model/tool calls: 294 (+39 stage summaries). Actual spend: $0.00 (all free tiers).
 
 | failure class | count |
 |---|---|
 | 402 free limit | 2 |
-| 429 quota/rate | 56 |
+| 429 quota/rate | 74 |
 | flagged (3030) | 2 |
 | other | 6 |
 | rejected_too_long | 7 |

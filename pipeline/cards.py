@@ -22,8 +22,8 @@ def font(size: int, ethiopic: bool = False, weight: str = "SemiBold") -> ImageFo
     return f
 
 
-def wrap_subtitle(text: str, width: int = 40) -> list[list[str]]:
-    """Split into cards of at most two lines of ~40 characters."""
+def wrap_subtitle(text: str, width: int = 32) -> list[list[str]]:
+    """At most two lines per card. 40 chars overflowed the 1080 px vertical frame at 54 px (FAILURES F11)."""
     lines = textwrap.wrap(text, width=width)
     return [lines[i:i + 2] for i in range(0, len(lines), 2)]
 

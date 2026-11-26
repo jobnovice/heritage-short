@@ -54,3 +54,7 @@ Each entry: what broke, what I tried, what fixed it. Newest at the bottom. Times
 - **Broke:** `flux-2-klein-4b` returned 400 "Your output has been flagged" (code 3030) for the commander reference sheet, twice, including after I softened the uniform wording. The fallback chain switched to Pollinations, so the stage did not block.
 - **Tried:** probing showed short prompts about the same man pass. The difference was my appended `Avoid: photorealistic, ..., gore, blood` clause.
 - **Fixed:** FLUX models have no negative prompt, so those words are read as content. That trips the safety filter and pushes images toward what I wanted to avoid. The clause is no longer sent; `style.negative` stays in the storyboard as documentation.
+
+## F11 - Review round 1 pushed the film past 90 s, and subtitles overflowed the vertical frame (03:40)
+- **Broke:** after adding the Friday shot and the year, the render was 90.96 s (limit 90). In the 9:16 export a 40-character subtitle line at 54 px ran off both edges ("…stayed with" cut).
+- **Fixed:** breathing room per shot trimmed (lead-in 0.5 → 0.4 s, tail 0.8 → 0.5 s, end card 4 → 3.5 s), about 5.5 s saved across 12 shots; subtitles wrap at 32 characters. Both are storyboard/code changes, so the cache re-timed every shot automatically.

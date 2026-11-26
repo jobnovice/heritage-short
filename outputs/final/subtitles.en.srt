@@ -1,61 +1,96 @@
 1
-00:00:00,500 --> 00:00:05,030
-This is my uncle's story. In the Derg
-years, he was a sailor in the navy.
+00:00:00,400 --> 00:00:04,280
+This is my uncle's story. In
+1982 E.C. (1989/90), he was a
 
 2
-00:00:06,500 --> 00:00:09,860
-The work was heavy. Sleep was four
-hours, at most.
+00:00:04,280 --> 00:00:08,460
+sailor in the Ethiopian Navy.
 
 3
-00:00:12,500 --> 00:00:14,910
-But on Thursday, the ship would sail to
-Massawa. To him, Massawa was like
+00:00:09,060 --> 00:00:13,560
+The work was heavy. Sleep was
+four hours, at most.
 
 4
-00:00:14,910 --> 00:00:17,620
-heaven.
+00:00:15,060 --> 00:00:18,220
+But on Thursday, the ship would
+sail to Massawa. To him, Massawa
 
 5
-00:00:19,500 --> 00:00:24,290
-On Tuesday, working deep in the belly of
-the ship, his foot slipped.
+00:00:18,220 --> 00:00:21,680
+was like heaven.
 
 6
-00:00:25,290 --> 00:00:28,710
-His ankle twisted. His arm broke.
+00:00:22,280 --> 00:00:24,800
+On Tuesday, working deep in the
+belly of the ship, his foot
 
 7
-00:00:30,290 --> 00:00:34,620
-His commander, who loved him like a son,
-told him: "You stay here. Rest."
+00:00:24,800 --> 00:00:27,620
+slipped.
 
 8
-00:00:37,290 --> 00:00:41,510
-His heart broke. He lost all hope; it
-felt like the end of the world.
+00:00:28,220 --> 00:00:32,440
+His ankle twisted. His arm
+broke.
 
 9
-00:00:43,290 --> 00:00:46,000
-On Thursday morning, the ship left
-without him.
+00:00:33,220 --> 00:00:36,060
+His commander, who loved him
+like a son, told him: "You stay
 
 10
-00:00:49,290 --> 00:00:53,600
-It never came back. His comrades, and
-his commander, stayed with the sea.
+00:00:36,060 --> 00:00:39,200
+here. Rest."
 
 11
-00:00:56,290 --> 00:01:00,080
-The fall that broke him that day was the
-hand that saved his life.
+00:00:40,220 --> 00:00:42,820
+His heart broke. He lost all
+hope; it felt like the end of
 
 12
-00:01:03,290 --> 00:01:05,420
-Today he preaches the gospel. He tells
-everyone one thing: "Let God lead your
+00:00:42,820 --> 00:00:45,720
+the world.
 
 13
-00:01:05,420 --> 00:01:07,860
-life."
+00:00:46,320 --> 00:00:50,500
+On Thursday morning, the ship
+left without him.
+
+14
+00:00:52,320 --> 00:00:57,200
+That same Thursday, an attack by
+Eritrean fighters sank the ship.
+
+15
+00:00:57,200 --> 00:01:02,380
+His comrades and his commander
+stayed with the sea.
+
+16
+00:01:02,980 --> 00:01:05,860
+On Friday, he heard the news. He
+calls it the day he was born
+
+17
+00:01:05,860 --> 00:01:09,040
+again.
+
+18
+00:01:09,980 --> 00:01:12,340
+The fall that broke him that day
+was the hand that saved his
+
+19
+00:01:12,340 --> 00:01:15,000
+life.
+
+20
+00:01:16,980 --> 00:01:20,420
+Today he preaches the gospel. He
+tells everyone one thing: "Let
+
+21
+00:01:20,420 --> 00:01:24,160
+God lead your life."
