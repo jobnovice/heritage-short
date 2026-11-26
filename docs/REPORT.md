@@ -3,7 +3,7 @@
 Ship's log: https://jobnovice.github.io/heritage-short/ · Film: [FILL IN 9:16 link] · [FILL IN 16:9 link]
 
 ## 1. What I set out to make, and for whom
-An 88-second Amharic film with English subtitles about my maternal uncle. In 1982 E.C. he was a sailor in the Ethiopian
+An 83-second Amharic film with English subtitles about my maternal uncle. In 1982 E.C. he was a sailor in the Ethiopian
 Navy; two days before his ship sailed for Massawa he slipped and broke his arm, and his commander, who loved him like a
 son, told him to stay behind. The ship was sunk in an attack by Eritrean fighters that Thursday. He heard the news on
 Friday, which he calls the day he was born again, and he is now a preacher whose message is "ሕይወትህን እግዚአብሔር ይምራው".
@@ -17,8 +17,8 @@ Today) over a chronological telling or a flash-forward to the sinking, because i
 moment and keeps the war at a distance.
 
 ## 2. What I learned from my audience
-**Review round 1 (first full cut):** family reviewers [FILL IN who] gave five notes, and each one changed the storyboard
-(DESIGN.md table, commit `feat(storyboard): review round 1`):
+**User test 1 (first full cut):** family reviewers watching on their phones gave five notes, and each one changed the
+storyboard (DESIGN.md table, commit `feat(storyboard): review round 1`). The radio-cut test I planned before it did not happen in time:
 - the older uncle didn't look like the young one (lighter skin) → his reference sheet is now generated *from* the young uncle's face;
 - "a random Tuesday and Thursday" → the year 1982 E.C. is stated in the first line;
 - his own turning point was missing → a new Friday shot: "He calls it the day he was born again";
@@ -28,9 +28,12 @@ moment and keeps the war at a distance.
 A native-speaker pass caught a literal calque: "በመርከቡ ሆድ ውስጥ" (the belly of the ship) became "በመርከቡ ውስጥ".
 My uncle watched the film before giving consent and asked for no changes.
 
-**User test 1 (radio cut) and user test 2 (near-final cut):** [FILL IN: three people each, what they said, what changed.]
+**User test 2 (near-final cut):** my sister and two cousins, none of whom had worked on the film.
+- **All three said the narrator's voice changed too much between scenes.** Every automatic check had passed (one model, one voice, ASR 0.84-0.97), but measured afterwards the 12 per-line takes ranged 112-174 Hz in median pitch. The film is now voiced in one TTS call and split back into lines by a small dynamic program, with per-line levelling: pitch 96-135 Hz, following the story (E16, F13).
+- **My sister:** on Friday he held two radios, one at each ear, and the slip showed only a shoe. s10 now has one 1980s radio in his left hand, and s04 shows the whole man falling, drawn from the young uncle's face reference so it matches the other shots (3 candidates each; one retry drew a mobile phone).
+- **Both cousins said they had never known this story about our uncle**, which is why the film exists.
 
-The biggest lesson: [FILL IN: e.g. reviewers reacted to facts and identity (the year, his face, his own words) more than to craft.]
+The biggest lesson: viewers judge identity and continuity (his face, his year, his own words, one narrator's voice) before craft, and they read pictures literally. A boot was a symbol to me and a shoe to them. My automatic checks measured what I knew how to measure; three people watching the whole film found what they missed.
 
 ## 3. The hardest problem and how I solved it
 **Amharic narration under a free quota.** Gemini TTS read my English style instruction aloud on 8 of 11 lines, but not
@@ -67,6 +70,6 @@ where a relative who doesn't code tells a story in Amharic and gets a storyboard
 to compare consistency against reference conditioning.
 
 ## Evidence index
-`runs.jsonl` (every call) · `COSTS.md` (measured; $0.00 spent) · `EXPERIMENTS.md` (15) · `FAILURES.md` (12) ·
-`DESIGN.md` · `ETHICS.md` (consent recorded 26 Nov 2026) · `tests/` (19 offline tests). Built with a coding agent
+`runs.jsonl` (every call) · `COSTS.md` (measured; $0.00 spent) · `EXPERIMENTS.md` (16) · `FAILURES.md` (13) ·
+`DESIGN.md` · `ETHICS.md` (consent recorded 26 Nov 2026) · `tests/` (21 offline tests). Built with a coding agent
 (Claude Code) under my direction: I designed the stages, the story and the experiments, and reviewed every change.
