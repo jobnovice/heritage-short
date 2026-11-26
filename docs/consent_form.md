@@ -67,3 +67,14 @@ He says, in his own words, something like:
 > *"I, [full name], have heard the narration of the AI film my nephew [name] made about my story. I agree to my story being told this way, to being shown as an illustrated character, and to it being posted on TikTok, YouTube and submitted to the training programme. Today is [date]."*
 
 **Keep the signed form or voice note privately. Do not commit it to the repository.** Record only the date, the form (signed / voice note) and any limits in ETHICS.md.
+
+### Voice-note script (sent to him with the final film)
+> እኔ ስሜ **[ሙሉ ስም]** ነው። ዛሬ **[ቀን]** ነው።
+> የወንድሜ ልጅ **[ስም]** በ1982 ዓ.ም. ከመርከቡ አደጋ ስለተረፍኩበት ታሪኬ በAI የሠራውን አጭር ፊልም አይቼ ትረካውን ሰምቻለሁ።
+> በፊልሙ ውስጥ በሥዕል መልክ እንደምታይ፣ ፎቶዬ እንዳልተጠቀመ፣ እና ተራኪው ድምፅ የእኔ ሳይሆን በAI የተሠራ መሆኑን ተረድቻለሁ።
+> ታሪኬ በዚህ መልኩ እንዲነገር፣ እና ፊልሙ በቲክቶክ፣ በዩቲዩብ፣ በGitHub እና ለስልጠናው ግምገማ በይፋ እንዲቀርብ እፈቅዳለሁ።
+> በማንኛውም ጊዜ እንዲቀየር ወይም እንዲወርድ መጠየቅ እንደምችል አውቃለሁ።
+
+*My name is [full name]. Today is [date]. I have watched the short AI film my nephew [name] made about how I survived the ship disaster in 1982 E.C., and heard its narration. I understand that I appear as an illustrated character, that no photo of me was used, and that the narrator's voice is AI-generated, not mine. I agree to my story being told this way and to the film being shown publicly on TikTok, YouTube, GitHub and for the training programme's review. I know I can ask at any time for it to be changed or taken down.*
+
+He may say it in his own words; it must include his name, the date, that he watched/heard it, and that he agrees.
