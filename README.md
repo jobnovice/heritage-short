@@ -15,7 +15,7 @@ is remade.
 <img src="docs/media/s08.jpg" width="15%"> <img src="docs/media/s09.jpg" width="15%"> <img src="docs/media/s12.jpg" width="15%">
 </p>
 
-**🎬 Film:** [9:16](#) · [16:9](#) *(links added after posting)* · **📜 The ship's log** (every shot, with the models, seeds and scores that made it): [docs/index.html](docs/index.html) → GitHub Pages
+**🎬 Film:** [9:16](#) · [16:9](#) *(links added after posting)* · **📜 The ship's log** (every shot, with the models, seeds and scores that made it): **[jobnovice.github.io/heritage-short](https://jobnovice.github.io/heritage-short/)**
 
 ---
 
@@ -127,7 +127,7 @@ Plan: 1 model call(s) would be made. Nothing has been called.
 2. `make plan` on a clean clone of the outputs → `0 model calls`.
 3. Open [`runs.jsonl`](runs.jsonl) and search for `"status": "rejected_too_long"`: those are the takes where the voice read its prompt aloud, caught and retried.
 4. Skim [EXPERIMENTS.md](EXPERIMENTS.md) E5 (style prompts), E6 (Gemini vs Addis AI) and E12 (pose leaking through references).
-5. Open the ship's log ([docs/index.html](docs/index.html)) for the same story told as data.
+5. Open the ship's log ([live page](https://jobnovice.github.io/heritage-short/)) for the same story told as data.
 
 ---
 
