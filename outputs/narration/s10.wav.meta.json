@@ -1,9 +1,10 @@
 {
-  "input_hash": "6dd636192f2bb989",
-  "run_id": "20261126T083413-7f3f",
-  "written_at": "2026-11-26T08:36:18+00:00",
-  "duration_sec": 5.6,
+  "input_hash": "aa5855633eed319c",
+  "run_id": "20261126T114331-c53b",
+  "written_at": "2026-11-26T11:43:52+00:00",
+  "duration_sec": 4.87,
   "text": "ዓርብ ዕለት ዜናውን ሰማ። ያንን ቀን፣ ዳግም የተወለደበት ቀን ይለዋል።",
-  "model": "gemini-3.1-flash-tts-preview",
-  "latency_sec": 46.866
+  "take": "single",
+  "model": "gemini-3.8-flash-tts",
+  "latency_sec": 20.36
 }

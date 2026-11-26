@@ -1,9 +1,10 @@
 {
-  "input_hash": "a0de69b22cf9da22",
-  "run_id": "20261126T083413-7f3f",
-  "written_at": "2026-11-26T08:34:24+00:00",
-  "duration_sec": 4.56,
+  "input_hash": "aa5855633eed319c",
+  "run_id": "20261126T114331-c53b",
+  "written_at": "2026-11-26T11:43:52+00:00",
+  "duration_sec": 3.614,
   "text": "ሥራው ከባድ ነበር። እንቅልፍ ቢበዛ አራት ሰዓት።",
-  "model": "gemini-3.1-flash-tts-preview",
-  "latency_sec": 4.699
+  "take": "single",
+  "model": "gemini-3.8-flash-tts",
+  "latency_sec": 20.36
 }

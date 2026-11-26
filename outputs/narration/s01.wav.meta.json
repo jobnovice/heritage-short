@@ -1,9 +1,10 @@
 {
-  "input_hash": "5420e8937701b4b3",
-  "run_id": "20261126T083413-7f3f",
-  "written_at": "2026-11-26T08:34:19+00:00",
-  "duration_sec": 7.4,
+  "input_hash": "aa5855633eed319c",
+  "run_id": "20261126T114331-c53b",
+  "written_at": "2026-11-26T11:43:52+00:00",
+  "duration_sec": 6.513,
   "text": "ይህ የአጎቴ ታሪክ ነው። በሺህ ዘጠኝ መቶ ሰማንያ ሁለት ዓመተ ምሕረት፣ የኢትዮጵያ ባሕር ኃይል መርከበኛ ነበር።",
-  "model": "gemini-3.1-flash-tts-preview",
-  "latency_sec": 6.569
+  "take": "single",
+  "model": "gemini-3.8-flash-tts",
+  "latency_sec": 20.36
 }

@@ -1,9 +1,10 @@
 {
-  "input_hash": "bc439b6cc9780272",
-  "run_id": "20261126T083413-7f3f",
-  "written_at": "2026-11-26T08:34:51+00:00",
-  "duration_sec": 5.76,
+  "input_hash": "aa5855633eed319c",
+  "run_id": "20261126T114331-c53b",
+  "written_at": "2026-11-26T11:43:52+00:00",
+  "duration_sec": 4.097,
   "text": "እንደ ልጁ የሚወደው አዛዡ፣ «አንተ እዚሁ ቆይ፤ እረፍ» አለው።",
-  "model": "gemini-3.1-flash-tts-preview",
-  "latency_sec": 9.013
+  "take": "single",
+  "model": "gemini-3.8-flash-tts",
+  "latency_sec": 20.36
 }
