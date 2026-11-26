@@ -16,7 +16,7 @@ import wave
 from pathlib import Path
 
 from . import providers as P
-from .common import (OUT, QuotaExhausted, RetryableError, StageReport, ensure_dir, input_hash, is_fresh, load_storyboard,
+from .common import (OUT, QuotaExhausted, RetryableError, read_meta, StageReport, ensure_dir, input_hash, is_fresh, load_storyboard,
                      log_run, timed, with_retries, write_meta)
 
 SR = 24000
@@ -144,9 +144,14 @@ def main(argv=None):
         dur = write_wav(out, pcm)
         write_meta(out, h, duration_sec=dur, text=s["narration"]["am"], **info)
         rep.miss(s["id"], f"{dur:.2f}s")
+    models = {read_meta(d / f"{s['id']}.wav").get("model") for s in sb["shots"] if (d / f"{s['id']}.wav").exists()}
+    if len(models) > 1:  # F12: a fallback chain can switch models mid-film and change the voice's character
+        print(f"  WARNING: narration takes come from {len(models)} models {sorted(map(str, models))}; "
+              f"the voice may not match across shots. Pin voice.model or rerun with --force.")
+        log_run(stage="narration", kind="consistency_warning", models=sorted(map(str, models)))
     if a.verify:
         import json
-        from .common import meta_path, read_meta
+        from .common import meta_path
         for s in sb["shots"]:
             out = d / f"{s['id']}.wav"
             if out.exists():

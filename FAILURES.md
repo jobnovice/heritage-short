@@ -58,3 +58,9 @@ Each entry: what broke, what I tried, what fixed it. Newest at the bottom. Times
 ## F11 - Review round 1 pushed the film past 90 s, and subtitles overflowed the vertical frame (03:40)
 - **Broke:** after adding the Friday shot and the year, the render was 90.96 s (limit 90). In the 9:16 export a 40-character subtitle line at 54 px ran off both edges ("…stayed with" cut).
 - **Fixed:** breathing room per shot trimmed (lead-in 0.5 → 0.4 s, tail 0.8 → 0.5 s, end card 4 → 3.5 s), about 5.5 s saved across 12 shots; subtitles wrap at 32 characters. Both are storyboard/code changes, so the cache re-timed every shot automatically.
+
+## F12 - The fallback chain mixed two TTS models in one film (11:30)
+- **Broke:** after the s04 wording fix, `make film` voiced s04 with `gemini-3.8-flash-tts` (its daily quota had reset overnight), while the other 11 lines came from `gemini-3.1-flash-tts-preview`. Same prebuilt voice name, different model: the narrator's character could change mid-film. Nothing failed, so nothing warned.
+- **Tried:** pinned `voice.model` to the model the film was voiced with. The regeneration hit a per-minute 429 on s08, which then fell back to 3.8: the same mix again.
+- **Fixed:** the narration stage now checks which models produced the takes and logs a `consistency_warning` if there is more than one. s08 was retaken on the pinned model: all 12 lines from `gemini-3.1-flash-tts-preview`. My first version of the check crashed the stage (a local `import read_meta` further down the function shadowed the module name, `UnboundLocalError`), which is why that run printed no summary.
+- **Lesson:** fallbacks protect availability but can quietly cost consistency. For a voice, consistency is the requirement.
