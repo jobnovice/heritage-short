@@ -4,14 +4,18 @@
 
 ### <a id="consent-uncle"></a>The uncle (story owner; depicted as a stylised character `uncle_young` / `uncle_now`)
 - **What is depicted:** an illustrated (gouache-style) character. **No photograph of him was used** as a reference or sent to any model; the face comes from a text description only.
-- **Voice:** not his. Narration is a synthetic TTS voice (Addis AI / Gemini prebuilt voice), not a clone.
+- **Voice:** not his. The narration is Gemini's prebuilt male voice "Charon" (an earlier radio cut used Addis AI's default voice), not a clone; no recording of him was ever sent to any model.
 - **Words:** the narration paraphrases the story he told me. The one line quoted as his ("ሕይወትህን እግዚአብሔር ይምራው") is his own message.
 - **Consent record:**
-  - Date: [FILL IN]
-  - Form: [FILL IN: e.g. Telegram voice note / signed message, kept privately by me, not committed]
-  - What he agreed to: [FILL IN: his story being told in a public AI-made film, an illustrated likeness, the narration text (he read or heard it), the mention of his despair, public posting on TikTok/YouTube]
-  - Any requests or limits: [FILL IN]
-- **Status:** [FILL IN: ✅ recorded / ❌ not yet]. **The film is not posted until this is ✅.**
+  - **Who:** J. G., my maternal uncle (I am his sister's son). His full name is in the recording; it is withheld here for privacy because he agreed to his story being public, not to his name being published.
+  - **Date:** Thursday 26 November 2026 (ሕዳር 17, 2019 ዓ.ም.).
+  - **Form:** a Telegram voice note in Amharic, following the script in [docs/consent_form.md](docs/consent_form.md). Kept privately by me and **not committed** (`.gitignore` blocks consent media).
+  - **What he said (transcribed by me):**
+    > እኔ ስሜ [ሙሉ ስም] ነው። ዛሬ ሐሙስ ኅዳር 26, 2026 ነው። የእህቴ ልጅ [ስም] በ1982 ዓ.ም. ከመርከቡ አደጋ ስለተረፍኩበት ታሪኬ በAI የሠራውን አጭር ፊልም አይቼ ትረካውን ሰምቻለሁ። በፊልሙ ውስጥ በሥዕል መልክ እንደምታይ፣ ፎቶዬ እንዳልተጠቀመ፣ እና ተራኪው ድምፅ የእኔ ሳይሆን በAI የተሠራ መሆኑን ተረድቻለሁ። ታሪኬ በዚህ መልኩ እንዲነገር፣ እና ፊልሙ በቲክቶክ፣ በዩቲዩብ፣ በGitHub እና ለስልጠናው ግምገማ በይፋ እንዲቀርብ እፈቅዳለሁ። በማንኛውም ጊዜ እንዲቀየር ወይም እንዲወርድ መጠየቅ እንደምችል አውቃለሁ።
+  - **In English:** he watched the AI film and heard its narration; he understands he appears as an illustrated character, that no photo of him was used, and that the narrator's voice is AI-generated, not his; he agrees to his story being told this way and to the film being shown publicly on TikTok, YouTube, GitHub and for the programme's review; he knows he can ask at any time for it to be changed or taken down.
+  - **Requests or limits:** none stated.
+- **Timing (stated honestly):** the brief asks for consent before anything of a real person is generated. I asked him for the story and his permission to make the film at the start, but the recorded consent came after the first private drafts. Those drafts (keyframes, narration, a first cut) were never posted; had he declined, they would have been deleted and the story changed. He consented after watching the film itself, so he agreed to what he actually saw. Later edits are wording-level (e.g. s04 "inside the ship"); any substantive change will be shown to him again before posting.
+- **Status:** ✅ recorded, 26 Nov 2026.
 
 ### <a id="commander-not-depicted"></a>The commander and the comrades
 They died in the sinking and cannot consent. The commander appears **only as a backlit silhouette** described generically ("a kind Ethiopian ship captain…"), with no name, face, or attempt at a real likeness. The comrades are not depicted at all. The end card dedicates the film to them. [FILL IN: optionally, the uncle's view on how his commander is portrayed.]
