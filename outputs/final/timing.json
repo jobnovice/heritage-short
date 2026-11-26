@@ -2,85 +2,85 @@
   {
     "id": "s01",
     "start": 0.0,
-    "duration": 8.3,
-    "narration_sec": 7.4,
+    "duration": 7.41,
+    "narration_sec": 6.513,
     "voice_at": 0.4
   },
   {
     "id": "s02",
-    "start": 8.3,
+    "start": 7.41,
     "duration": 6,
-    "narration_sec": 4.56,
-    "voice_at": 8.7
+    "narration_sec": 3.614,
+    "voice_at": 7.81
   },
   {
     "id": "s03",
-    "start": 14.3,
-    "duration": 7.58,
-    "narration_sec": 6.68,
-    "voice_at": 14.7
+    "start": 13.41,
+    "duration": 7,
+    "narration_sec": 5.369,
+    "voice_at": 13.81
   },
   {
     "id": "s04",
-    "start": 21.88,
-    "duration": 5.94,
-    "narration_sec": 5.04,
-    "voice_at": 22.28
+    "start": 20.41,
+    "duration": 5,
+    "narration_sec": 3.345,
+    "voice_at": 20.81
   },
   {
     "id": "s05",
-    "start": 27.82,
+    "start": 25.41,
     "duration": 5,
-    "narration_sec": 3.96,
-    "voice_at": 28.22
+    "narration_sec": 2.268,
+    "voice_at": 25.81
   },
   {
     "id": "s06",
-    "start": 32.82,
+    "start": 30.41,
     "duration": 7,
-    "narration_sec": 5.76,
-    "voice_at": 33.22
+    "narration_sec": 4.097,
+    "voice_at": 30.81
   },
   {
     "id": "s07",
-    "start": 39.82,
-    "duration": 6.3,
-    "narration_sec": 5.4,
-    "voice_at": 40.22
+    "start": 37.41,
+    "duration": 6,
+    "narration_sec": 3.776,
+    "voice_at": 37.81
   },
   {
     "id": "s08",
-    "start": 46.12,
+    "start": 43.41,
     "duration": 6,
-    "narration_sec": 3.72,
-    "voice_at": 46.52
+    "narration_sec": 2.548,
+    "voice_at": 43.81
   },
   {
     "id": "s09",
-    "start": 52.12,
-    "duration": 9.86,
-    "narration_sec": 8.96,
-    "voice_at": 52.52
+    "start": 49.41,
+    "duration": 8.28,
+    "narration_sec": 7.38,
+    "voice_at": 49.81
   },
   {
     "id": "s10",
-    "start": 61.98,
+    "start": 57.69,
     "duration": 7,
-    "narration_sec": 5.6,
-    "voice_at": 62.38
+    "narration_sec": 4.87,
+    "voice_at": 58.09
   },
   {
     "id": "s11",
-    "start": 68.98,
+    "start": 64.69,
     "duration": 7,
-    "narration_sec": 4.64,
-    "voice_at": 69.38
+    "narration_sec": 3.05,
+    "voice_at": 65.09
   },
   {
     "id": "s12",
-    "start": 75.98,
+    "start": 71.69,
     "duration": 8,
-    "narration_sec": 6.96,
-    "voice_at": 76.38
+    "narration_sec": 6.099,
+    "voice_at": 72.09
   }
 ]

@@ -1,8 +1,8 @@
 {
-  "input_hash": "045e5e334ace7947",
-  "run_id": "20261126T092149-3989",
-  "written_at": "2026-11-26T09:22:05+00:00",
-  "premix_lufs": -16.01,
-  "final_lufs": -14.15,
-  "final_tp": -1.0
+  "input_hash": "2614a4d1c24ac007",
+  "run_id": "20261126T115343-4bbb",
+  "written_at": "2026-11-26T11:54:08+00:00",
+  "premix_lufs": -19.36,
+  "final_lufs": -14.29,
+  "final_tp": -0.99
 }
