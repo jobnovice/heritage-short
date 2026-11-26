@@ -5,7 +5,7 @@
 > On Friday he heard the news. He calls it the day he was born again. Today he is a preacher who tells everyone:
 > **ሕይወትህን እግዚአብሔር ይምራው**, let God lead your life.*
 
-This repository is a small film studio in code that turns that story into an **88-second Amharic short film** with English
+This repository is a small film studio in code that turns that story into an **83-second Amharic short film** with English
 subtitles, an original score, and both vertical (9:16) and horizontal (16:9) exports. Every image, line of narration and
 note of music comes from one file, [`storyboard.json`](storyboard.json). Change one sentence in it and only that shot
 is remade.
@@ -50,7 +50,7 @@ make film      # -> outputs/final/thursday_9x16.mp4 and thursday_16x9.mp4
 | `make plan` | **predicts** what `make film` would regenerate, like `terraform plan` | no |
 | `make radio` | the prototype: narration + score on a black screen | TTS only |
 | `make film` | the whole film; only what changed is regenerated | only for changes |
-| `make test` | 19 offline tests (contract, single-shot caching, timing, retries, music) | no |
+| `make test` | 21 offline tests (contract, single-shot caching, timing, retries, music, take splitting) | no |
 | `make costs` | rebuilds the measured tables in COSTS.md from `runs.jsonl` | no |
 | `make showcase` | rebuilds the ship's-log page in `docs/` | no |
 
@@ -82,6 +82,7 @@ quality gates) is in [ARCHITECTURE.md](ARCHITECTURE.md).
   meaning. The film opens in **tizita** (the mode of longing), turns to **ambassel** for the fall, goes **silent** at the
   sinking, and brings the Massawa theme back in **bati major** for the rebirth. It is deterministic and original, and it
   needs no GPU ([`pipeline/music.py`](pipeline/music.py)).
+- **One narrator, one take.** The whole script is voiced in a single TTS call and cut back into lines at the right pauses, because three viewers heard the per-line takes as different men (E16).
 - **The film is checked by listening to itself.** Each narration take is transcribed back by a speech model and scored
   against the script. That caught the TTS model reading its own instructions aloud (FAILURES F7).
 - **Faces come from a reference, not from luck.** A head-and-shoulders crop of each character sheet conditions every
@@ -104,9 +105,9 @@ Take shot **s05**, the cost of the fall:
 ```
 
 1. **validate**: the schema demands a `reason`, a camera move (so a fallback always exists) and both languages; `uncle_young` must exist and, being a real person, must point to a consent record.
-2. **narration**: the Amharic line goes to Gemini TTS → `outputs/narration/s05.wav` (3.92 s). The sidecar keeps the duration (and an ASR score when `--verify` ran).
+2. **narration**: the whole script is voiced in one Gemini TTS call (one performance, so one consistent narrator) and split back into lines → `outputs/narration/s05.wav` (2.27 s). The sidecar keeps the duration (and an ASR score when `--verify` ran).
 3. **keyframes**: `{uncle_young}` expands to his fixed description, the style block is appended, and his face crop is sent as `input_image_0` → `s05.png`.
-4. **shots**: duration = max(5 s, 3.92 s + 0.4 s lead-in + 0.5 s tail) = 5 s; a slow push-in over the keyframe → `s05.mp4`.
+4. **shots**: duration = max(5 s, 2.27 s + 0.4 s lead-in + 0.5 s tail) = 5 s; a slow push-in over the keyframe → `s05.mp4`.
 5. **assemble**: the voice lands at 0.4 s into the shot, the score ducks under it, and the subtitle card *"His ankle twisted. His arm broke."* is drawn by Pillow inside the vertical safe area.
 
 Change that Amharic line and run `make plan`:
@@ -140,15 +141,17 @@ Plan: 1 model call(s) would be made. Nothing has been called.
 | Score composed in code instead of ACE-Step | Deterministic, original, culturally specific, zero GPU; the qenet *are* the story's emotional map | No orchestral richness |
 | Gemini Charon narrates, not Addis AI | Family asked for a man's voice; Addis exposes no documented male voice (E14) | Gemini's per-model daily quota (F8) |
 | The cause of the sinking is named | First draft stayed neutral; the family's telling names it, and it is their story (DESIGN) | Less neutral for some viewers |
+| Whole narration in one TTS call, split into lines | Separate takes sounded like different men (user test 2, E16) | Editing one line re-records all 12 (still one call) |
 | No in-text style prompts for TTS | They were spoken aloud on 8/11 lines (E5) | Less control over delivery |
 
 ---
 
 ## What broke
-Eleven entries in [FAILURES.md](FAILURES.md). The ones that taught the most:
+Thirteen entries in [FAILURES.md](FAILURES.md). The ones that taught the most:
 - **F4:** the cache served a stale video after a renderer fix. *Code is an input.*
 - **F7:** Gemini TTS read the English style instruction aloud, and only on some lines. A duration guard and an ASR round trip now catch it.
 - **F8:** the Gemini TTS free quota is **per model, per day**. A model chain (3.8 → 3.1-preview → 3.8-lite → 2.5) keeps the run going.
+- **F13:** every automatic check passed, and three viewers still heard the narrator change between scenes. Each line was a separate take (pitch 112-174 Hz); the film is now voiced in one take and split by a small dynamic program (E16).
 - **F10:** the words "gore, blood" in a FLUX prompt meant *avoid* to me and *draw* to the model, and they tripped the safety filter.
 
 ---
@@ -175,7 +178,7 @@ Eleven entries in [FAILURES.md](FAILURES.md). The ones that taught the most:
 |---|---|
 | [DESIGN.md](DESIGN.md) | audience, intent, the days-of-the-week structure, user tests and what they changed |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | stages, contracts, cache keys, fallback chains, quality gates |
-| [EXPERIMENTS.md](EXPERIMENTS.md) | 15 experiments: hypothesis → change → result → decision |
+| [EXPERIMENTS.md](EXPERIMENTS.md) | 16 experiments: hypothesis → change → result → decision |
 | [FAILURES.md](FAILURES.md) | what broke, what I tried, what fixed it |
 | [COSTS.md](COSTS.md) | measured latency, failure counts, list-price equivalent (generated from logs) |
 | [ETHICS.md](ETHICS.md) | consent, licences of every model and output, AI labelling |
