@@ -12,3 +12,14 @@ outputs/**/*.png
 outputs/**/*.jpg
 outputs/**/*.mp3
 .DS_Store
+
+# consent recordings and signed forms stay private (ETHICS.md records only date/form/limits)
+*consent*.mp4
+*consent*.m4a
+*consent*.ogg
+*consent*.opus
+*consent*.mp3
+*consent*.jpg
+*consent*.png
+*consent*.pdf
+consent/
