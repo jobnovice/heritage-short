@@ -26,6 +26,9 @@ FPS = 24
 
 
 # ---------------------------------------------------------------- audio
+LINE_RMS = 0.12 * 32768  # target speech RMS per line before the voice-bus loudnorm
+
+
 def build_voice(sb, timing, total, path: Path) -> None:
     sr = 24000
     track = np.zeros(int((total + 1) * sr), dtype=np.int32)
@@ -34,7 +37,13 @@ def build_voice(sb, timing, total, path: Path) -> None:
         if not wav.exists():
             continue
         with wave.open(str(wav)) as w:
-            x = np.frombuffer(w.readframes(w.getnframes()), dtype="<i2").astype(np.int32)
+            x = np.frombuffer(w.readframes(w.getnframes()), dtype="<i2").astype(np.float64)
+        # level every line to the same speech RMS (takes varied by 5.4 LU, E16); gain capped at +-6 dB
+        act = x[np.abs(x) > 0.01 * 32768]
+        if len(act):
+            g = np.clip(LINE_RMS / np.sqrt((act ** 2).mean()), 0.5, 2.0)
+            x = x * g
+        x = x.astype(np.int32)
         j = int(t["voice_at"] * sr)
         track[j:j + len(x)] += x[: len(track) - j]
     with wave.open(str(path), "wb") as w:
