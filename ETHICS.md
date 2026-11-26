@@ -15,6 +15,7 @@
   - **In English:** he watched the AI film and heard its narration; he understands he appears as an illustrated character, that no photo of him was used, and that the narrator's voice is AI-generated, not his; he agrees to his story being told this way and to the film being shown publicly on TikTok, YouTube, GitHub and for the programme's review; he knows he can ask at any time for it to be changed or taken down.
   - **Requests or limits:** none stated.
 - **Timing (stated honestly):** the brief asks for consent before anything of a real person is generated. I asked him for the story and his permission to make the film at the start, but the recorded consent came after the first private drafts. Those drafts (keyframes, narration, a first cut) were never posted; had he declined, they would have been deleted and the story changed. He consented after watching the film itself, so he agreed to what he actually saw. Later edits are wording-level (e.g. s04 "inside the ship"); any substantive change will be shown to him again before posting.
+- **Changes after consent (user test 2):** s04 redrawn to show him falling (still the illustrated character), s10 redrawn with one radio, and the narration re-voiced in one take (same AI voice, same words). No new personal detail was added. Shown to him before posting: [FILL IN date / his reply].
 - **Status:** ✅ recorded, 26 Nov 2026.
 
 ### <a id="commander-not-depicted"></a>The commander and the comrades
