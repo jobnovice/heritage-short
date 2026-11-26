@@ -27,9 +27,9 @@ How might we… help my cousins feel the weight of a single Tuesday that decided
 - **Every shot has a stated reason:** `storyboard.json → shots[].reason` (validated as required by the schema).
 
 ## Sensitive choices
-- **His despair:** he told me he considered suicide. The film says "he lost all hope; it felt like the end of the world" and shows nothing explicit. [FILL IN: confirm with uncle that he is comfortable with this wording.]
+- **His despair:** he told me he considered suicide. The film says "he lost all hope; it felt like the end of the world" and shows nothing explicit. He heard the full narration, including this line, before giving his recorded consent (ETHICS.md), and asked for no change.
 - **The war:** narration says the ship "never came back" and the men "stayed with the sea". It names no enemy, so Eritrean viewers are not cast as villains in a story about loss on all sides.
-- **Historical facts:** I state no date or vessel name. [FILL IN: date / ship name if the uncle confirms; reference: fall of Massawa, Feb 1990.]
+- **Historical facts:** I state no date or vessel name. After review round 1 the year was added from the family's account (1982 E.C., consistent with the fall of Massawa in Feb 1990); no vessel name is given.
 
 ---
 

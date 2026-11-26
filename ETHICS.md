@@ -30,7 +30,7 @@ No real names, places of residence or photos are sent to any provider. Prompts d
 | FLUX.2 [klein] 4B via Cloudflare Workers AI | keyframes, reference sheets | Apache 2.0 (model); Cloudflare Workers AI terms | permitted |
 | FLUX via Pollinations.ai | early sheets, fallback | Pollinations terms (free tier) | fallback only; watermarked outputs not used in the film |
 | Gemini TTS (gemini-2.5/3.8 flash TTS) | narration (comparison) | Gemini API Additional Terms (free tier: Google may use inputs to improve products) | permitted |
-| Addis AI TTS | narration (radio cut) | [FILL IN: check Addis AI terms of use] | [FILL IN] |
+| Addis AI TTS | first radio cut and the blind benchmark; not in the final film | no public terms of use or API docs found (FAILURES F9); used under the free key's terms | benchmark/prototype only |
 | Microsoft Edge neural voice `am-ET-AmehaNeural` via open-source `edge-tts` | blind voice benchmark only | edge-tts is MIT; it uses the Edge read-aloud service, which is not an official API for this use | benchmark clips only, not in the film |
 | Gemini 3.5 transcribe / 2.5 flash | ASR quality check only | Gemini API terms | not in film |
 | qenet composer (this repo) | original score + sea ambience | MIT (this repository); no model, no samples | permitted |
