@@ -1,6 +1,6 @@
 # One command from a clean clone:  make setup && make film
 PY := .venv/bin/python
-.PHONY: setup smoke validate script narration keyframes sheets shots music radio film plan clean costs plan test
+.PHONY: setup smoke validate script narration keyframes sheets shots music radio film plan clean costs plan test showcase
 
 setup:            ## create venv and install deps (needs python3 + ffmpeg on PATH)
 	python3 -m venv .venv && $(PY) -m pip install -q -r requirements.txt
@@ -44,3 +44,6 @@ plan:             ## predict what `make film` would regenerate - no model is cal
 
 test:             ## offline test suite (no API keys, no network)
 	$(PY) -m pytest -q tests
+
+showcase:         ## build docs/index.html, the ship's-log provenance page (GitHub Pages)
+	$(PY) -m pipeline.showcase $(if $(FILM_URL),--film-url $(FILM_URL),)
