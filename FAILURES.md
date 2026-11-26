@@ -64,3 +64,9 @@ Each entry: what broke, what I tried, what fixed it. Newest at the bottom. Times
 - **Tried:** pinned `voice.model` to the model the film was voiced with. The regeneration hit a per-minute 429 on s08, which then fell back to 3.8: the same mix again.
 - **Fixed:** the narration stage now checks which models produced the takes and logs a `consistency_warning` if there is more than one. s08 was retaken on the pinned model: all 12 lines from `gemini-3.1-flash-tts-preview`. My first version of the check crashed the stage (a local `import read_meta` further down the function shadowed the module name, `UnboundLocalError`), which is why that run printed no summary.
 - **Lesson:** fallbacks protect availability but can quietly cost consistency. For a voice, consistency is the requirement.
+
+## F13 - Every check passed, and three viewers still heard a different narrator (user test 2)
+- **Broke:** my sister and two cousins independently said the narrator's voice changes between scenes. The pipeline had checked the model (F12), the voice name, the take length (F7) and the words (ASR 0.84-0.97). None of these measure whether 12 separate takes sound like one man; measured afterwards, median pitch ranged 112-174 Hz.
+- **Tried:** per-line loudness levelling alone fixes the 5.4 LU spread but not the pitch.
+- **Fixed:** one TTS call for the whole script, split back into lines (E16), plus levelling. Pitch spread fell from 62 Hz to 39 Hz and now follows the story.
+- **Lesson:** the automatic checks measured what I knew how to measure. The test that mattered was three people listening to the whole film.
