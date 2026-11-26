@@ -117,3 +117,12 @@ the `.meta.json` sidecars under `outputs/`. Times are EAT, 26 Nov 2026.
 - **Measured so far:** latency per line: edge-tts ~2.5 s, Addis ~4 s, Gemini ~6 s.
 - **Result:** [FILL IN after >= 5 listeners: `python -m pipeline.benchmark score` writes benchmark/RESULTS.md]
 - **Decision:** [FILL IN: keep Charon, or switch the film's voice and say why]
+
+## E16 - One take for the whole film vs one take per line (user test 2)
+- **Hypothesis:** the narrator sounds like a different man between scenes because every line is a separate TTS call; voicing the whole script in one call gives one performance.
+- **Measured before (12 per-line takes, `gemini-3.1-flash-tts-preview`, Charon):** median F0 112-174 Hz (s03 112, s04 174), integrated loudness -22.2 to -16.8 LUFS (5.4 LU spread).
+- **Change:** `voice.take: "single"`. All 12 lines, separated by blank lines, in one call to `gemini-3.8-flash-tts` (3.1-preview's 10/day quota was spent; with a single take the model choice no longer splits the voice). 62-66 s of audio in ~20 s.
+- **Splitting:** cutting at the 11 longest silences failed: the gaps between lines (0.74-1.46 s) overlap the pauses inside lines (up to 0.83 s), and s01 came out 15.6 s long. A dynamic program over all silences >= 0.25 s, minimising the squared relative error between each segment and its line's expected length (character share of the take), put every boundary on the right word (checked by ASR, first words of each segment). Unit test: `test_single_take_split_ignores_pauses_inside_lines`.
+- **Measured after:** median F0 96-135 Hz; the remaining movement follows the story (~100 Hz through s07-s10, grief and news), not the take. Speech RMS per line within 4.7 dB raw, then levelled to a common RMS in `build_voice`. ASR similarity (gemini-2.5-flash, as gemini-3.5-transcribe's quota was spent): 0.89-1.0 on 9 lines; s01 0.76 (the transcriber writes the year as Ge'ez numerals); s08 0.75 (transcript drops the final word; the envelope shows it spoken and fading cleanly: confirm by ear); s11 not scored (429).
+- **Cost:** editing any line now re-records the whole take (still 1 call; `make plan` counts it as 1) and re-times every shot by a few hundredths of a second. Single-shot regeneration still holds for keyframes and shots.
+- **Decision:** single take. A voice that is consistent across the film matters more than a one-line retake.
