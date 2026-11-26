@@ -25,7 +25,7 @@
 
 | Stage | Reads from storyboard | Writes | Cache key (input hash) |
 |---|---|---|---|
-| `narration` | `voice.*`, `shots[].narration.am` | `outputs/narration/sNN.wav` + measured duration | provider, model, voice, style, line |
+| `narration` | `voice.*`, `shots[].narration.am` | `outputs/narration/sNN.wav` + measured duration (single take: also `_take.wav`) | provider, model, voice, style, line; with `take: "single"` every line, so all shots share one key |
 | `keyframes` | `style.*`, `characters.*`, `shots[].image_prompt/seed` | `outputs/keyframes/sheet_*.png`, `sNN.png` | full prompt, seed, provider, model, size, **hashes of reference images** |
 | `music` | `music.*`, shot timing | `outputs/music/score.wav`, `sea.wav` | composer source code, cue list, seed, timing |
 | `shots` | `shots[].motion`, timing | `outputs/shots/sNN.mp4` (1440² master) | stage code, keyframe file hash, source (Ken Burns move or Wan clip hash), duration |
@@ -61,7 +61,7 @@ for "only that shot regenerated" in the walkthrough.
 
 | Stage | Fallback chain |
 |---|---|
-| narration | `voice.provider` (Addis or Gemini) → Gemini model chain `3.8-flash-tts → 3.8-flash-lite-tts → 2.5-flash-preview-tts` → keep the previous take and log a fallback |
+| narration | `voice.provider` (Addis or Gemini) → Gemini model chain (`voice.model`, then `voice.fallback_models`) → keep the previous take and log a fallback. With `voice.take: "single"` the chain applies to the one whole-script call, so a fallback can never mix models within the film |
 | keyframes | storyboard provider (Cloudflare klein) → Pollinations (self-throttled to 1/46 s) → a placeholder card with the prompt text |
 | shots | Wan 2.2 clip (only if its manifest matches the current keyframe hash) → Ken Burns |
 | music | `acestep`/`file` candidate → qenet composer (always available, deterministic) |
