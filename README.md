@@ -104,7 +104,7 @@ Take shot **s05**, the cost of the fall:
 ```
 
 1. **validate**: the schema demands a `reason`, a camera move (so a fallback always exists) and both languages; `uncle_young` must exist and, being a real person, must point to a consent record.
-2. **narration**: the Amharic line goes to Gemini TTS → `outputs/narration/s05.wav` (3.92 s). The sidecar keeps the duration and an ASR score.
+2. **narration**: the Amharic line goes to Gemini TTS → `outputs/narration/s05.wav` (3.92 s). The sidecar keeps the duration (and an ASR score when `--verify` ran).
 3. **keyframes**: `{uncle_young}` expands to his fixed description, the style block is appended, and his face crop is sent as `input_image_0` → `s05.png`.
 4. **shots**: duration = max(5 s, 3.92 s + 0.4 s lead-in + 0.5 s tail) = 5 s; a slow push-in over the keyframe → `s05.mp4`.
 5. **assemble**: the voice lands at 0.4 s into the shot, the score ducks under it, and the subtitle card *"His ankle twisted. His arm broke."* is drawn by Pillow inside the vertical safe area.
