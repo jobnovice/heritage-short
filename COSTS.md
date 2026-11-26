@@ -7,14 +7,14 @@ The table below is generated from `runs.jsonl` by `make costs`; do not edit it b
 <!-- AUTO:START -->
 | stage | provider | model | calls | ok | errors | median latency s | total s | GPU min | list-price USD |
 |---|---|---|---|---|---|---|---|---|---|
-| assemble | ffmpeg | mix | 7 | 7 | 0 | 25.87 | 178.6 | 0.0 | 0.0000 |
-| assemble | ffmpeg | render | 14 | 14 | 0 | 97.60 | 1110.2 | 0.0 | 0.0000 |
+| assemble | ffmpeg | mix | 8 | 8 | 0 | 24.71 | 194.7 | 0.0 | 0.0000 |
+| assemble | ffmpeg | render | 17 | 17 | 0 | 90.14 | 1209.1 | 0.0 | 0.0000 |
 | benchmark | addis | addis_default | 6 | 6 | 0 | 4.21 | 25.8 | 0.0 | 0.0000 |
 | benchmark | edge | edge_ameha | 6 | 6 | 0 | 2.81 | 30.6 | 0.0 | 0.0000 |
 | keyframes | cloudflare | @cf/black-forest-labs/flux-1-schnell | 2 | 0 | 2 | 0.00 | 0.0 | 0.0 | 0.0000 |
 | keyframes | cloudflare | @cf/black-forest-labs/flux-2-klein-4b | 50 | 48 | 2 | 6.64 | 392.4 | 0.0 | 0.0528 |
 | keyframes | pollinations | flux | 8 | 6 | 2 | 3.06 | 499.9 | 0.0 | 0.0000 |
-| music | qenet | qenet-composer-v1 | 6 | 6 | 0 | 5.94 | 35.8 | 0.0 | 0.0000 |
+| music | qenet | qenet-composer-v1 | 10 | 10 | 0 | 4.80 | 49.7 | 0.0 | 0.0000 |
 | narration | addis | addis-ai-tts-v1 | 22 | 22 | 0 | 3.91 | 88.5 | 0.0 | 0.0000 |
 | narration | gemini | gemini-3.8-flash-tts | 57 | 15 | 42 | 17.86 | 1027.2 | 0.0 | 0.0225 |
 | narration | gemini | gemini-3.8-flash-lite-tts | 26 | 6 | 20 | 17.98 | 319.0 | 0.0 | 0.0090 |
@@ -24,7 +24,7 @@ The table below is generated from `runs.jsonl` by `make costs`; do not edit it b
 | narration_verify | gemini | gemini-3.5-transcribe | 34 | 20 | 14 | 2.71 | 80.9 | 0.0 | 0.0040 |
 | shots | ffmpeg | zoompan | 49 | 49 | 0 | 3.49 | 191.8 | 0.0 | 0.0000 |
 
-Total logged model/tool calls: 348 (+56 stage summaries). Actual spend: $0.00 (all free tiers).
+Total logged model/tool calls: 356 (+64 stage summaries). Actual spend: $0.00 (all free tiers).
 
 | failure class | count |
 |---|---|
