@@ -27,6 +27,7 @@ No real names, places of residence or photos are sent to any provider. Prompts d
 | FLUX via Pollinations.ai | early sheets, fallback | Pollinations terms (free tier) | fallback only; watermarked outputs not used in the film |
 | Gemini TTS (gemini-2.5/3.8 flash TTS) | narration (comparison) | Gemini API Additional Terms (free tier: Google may use inputs to improve products) | permitted |
 | Addis AI TTS | narration (radio cut) | [FILL IN: check Addis AI terms of use] | [FILL IN] |
+| Microsoft Edge neural voice `am-ET-AmehaNeural` via open-source `edge-tts` | blind voice benchmark only | edge-tts is MIT; it uses the Edge read-aloud service, which is not an official API for this use | benchmark clips only, not in the film |
 | Gemini 3.5 transcribe / 2.5 flash | ASR quality check only | Gemini API terms | not in film |
 | qenet composer (this repo) | original score + sea ambience | MIT (this repository); no model, no samples | permitted |
 | Noto Sans / Noto Sans Ethiopic | subtitles, cards | SIL Open Font License 1.1 (`assets/fonts/OFL.txt`) | permitted |

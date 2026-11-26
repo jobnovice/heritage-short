@@ -147,3 +147,25 @@ def addis_tts(text: str, *, language: str = "am") -> bytes:
     if p.returncode:
         raise RuntimeError(p.stderr.decode()[:200])
     return p.stdout
+
+
+def edge_tts(text: str, *, voice: str = "am-ET-AmehaNeural", rate: str = "-5%") -> bytes:
+    """Microsoft Edge neural voices via the open-source `edge-tts` client (keyless). It uses the
+    browser read-aloud service, which is unofficial for this use: benchmark only (ETHICS.md).
+    Returns raw PCM 24 kHz s16 mono."""
+    import asyncio
+    import subprocess
+    import edge_tts as et
+
+    async def run():
+        c = et.Communicate(text, voice, rate=rate)
+        return b"".join([ch["data"] async for ch in c.stream() if ch["type"] == "audio"])
+    try:
+        mp3 = asyncio.run(run())
+    except Exception as e:
+        raise RetryableError(f"edge-tts: {e}") from e
+    p = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", "pipe:0", "-f", "s16le", "-ac", "1", "-ar", "24000", "pipe:1"],
+                       input=mp3, capture_output=True)
+    if p.returncode or not p.stdout:
+        raise RetryableError(f"edge-tts decode failed: {p.stderr.decode()[:200]}")
+    return p.stdout

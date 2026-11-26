@@ -92,3 +92,10 @@ the `.meta.json` sidecars under `outputs/`. Times are EAT, 26 Nov 2026.
 - **Change:** probed Addis AI with `gender`, `voice`, `speaker` = male (all silently ignored) and `voice_id` (a real parameter: "Voice male was not found for language am"; no voice-list route exists). Switched to Gemini `Charon`, with `gemini-3.1-flash-tts-preview` as the first fallback because it still had daily quota.
 - **Result (measured pitch, median F0 by autocorrelation):** Addis default ≈ 216-228 Hz (female range); Charon 131-179 Hz, median ≈ 150 Hz (male range). All 12 lines from one model, so the voice is consistent. ASR similarity 0.89-0.96 on clean lines; s01 scores 0.75 only because ASR writes "1982" as digits where the script spells it out.
 - **Decision:** Gemini Charon narrates. Addis AI stays as a provider and in the comparison (E6).
+
+### E15 - Blind preference test: three Amharic voices (ceiling: "a real benchmark")
+- **Hypothesis:** Amharic listeners prefer a native-trained voice (Addis AI, or Microsoft's Ameha) over a 180-language model (Gemini Charon), even though Charon was chosen for the film.
+- **Setup:** `python -m pipeline.benchmark render`. Three lines chosen to stress different things: s03 (place name ምጽዋ), s06 (quoted speech), s10 (the emotional turn). Each line by 3 voices, labelled A/B/C in a seeded random order per line, every clip loudness-matched to -20 LUFS (measured -19.9 to -20.3) so volume cannot bias the vote. The key is in `benchmark/blind_key.json`, not shown to listeners.
+- **Measured so far:** latency per line: edge-tts ~2.5 s, Addis ~4 s, Gemini ~6 s.
+- **Result:** [FILL IN after >= 5 listeners: `python -m pipeline.benchmark score` writes benchmark/RESULTS.md]
+- **Decision:** [FILL IN: keep Charon, or switch the film's voice and say why]

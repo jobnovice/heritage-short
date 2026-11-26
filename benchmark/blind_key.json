@@ -1,0 +1,17 @@
+{
+  "s03": {
+    "A": "edge_ameha",
+    "B": "addis_default",
+    "C": "gemini_charon"
+  },
+  "s06": {
+    "A": "addis_default",
+    "B": "gemini_charon",
+    "C": "edge_ameha"
+  },
+  "s10": {
+    "A": "edge_ameha",
+    "B": "addis_default",
+    "C": "gemini_charon"
+  }
+}
