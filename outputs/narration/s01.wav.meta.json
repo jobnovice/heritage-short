@@ -1,11 +1,9 @@
 {
-  "input_hash": "70b2ab0af5fafa02",
-  "run_id": "20261125T235132-7263",
-  "written_at": "2026-11-25T23:51:56+00:00",
-  "duration_sec": 7.76,
+  "input_hash": "5420e8937701b4b3",
+  "run_id": "20261126T083413-7f3f",
+  "written_at": "2026-11-26T08:34:19+00:00",
+  "duration_sec": 7.4,
   "text": "ይህ የአጎቴ ታሪክ ነው። በሺህ ዘጠኝ መቶ ሰማንያ ሁለት ዓመተ ምሕረት፣ የኢትዮጵያ ባሕር ኃይል መርከበኛ ነበር።",
   "model": "gemini-3.1-flash-tts-preview",
-  "latency_sec": 5.553,
-  "asr_text": "ይህ የአጎቴ ታሪክ ነው በ1982 ዓመተ ምህረት የኢትዮጵያ ባህር ሃይል መርከበኛ ነበር",
-  "asr_similarity": 0.75
+  "latency_sec": 6.569
 }

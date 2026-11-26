@@ -1,11 +1,9 @@
 {
-  "input_hash": "f45308a1e44280ba",
-  "run_id": "20261125T235132-7263",
-  "written_at": "2026-11-25T23:53:22+00:00",
+  "input_hash": "6ee72cd4324fddca",
+  "run_id": "20261126T083413-7f3f",
+  "written_at": "2026-11-26T08:34:37+00:00",
   "duration_sec": 5.04,
-  "text": "ማክሰኞ ዕለት፣ በመርከቡ ሆድ ውስጥ ሲሠራ፣ እግሩ ተንሸራተተ።",
+  "text": "ማክሰኞ ዕለት፣ በመርከቡ ውስጥ ሲሠራ፣ እግሩ ተንሸራተተ።",
   "model": "gemini-3.1-flash-tts-preview",
-  "latency_sec": 22.037,
-  "asr_text": "ማክሰኞ እለት በመርከቡ ሆድ ውስጥ ሲሰራ እግሩ ተንሸራተተ።",
-  "asr_similarity": 0.931
+  "latency_sec": 5.83
 }

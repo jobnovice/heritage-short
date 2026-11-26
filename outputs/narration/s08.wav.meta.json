@@ -1,11 +1,9 @@
 {
-  "input_hash": "b051a6be401f1dcd",
-  "run_id": "20261125T235132-7263",
-  "written_at": "2026-11-25T23:54:57+00:00",
-  "duration_sec": 3.88,
+  "input_hash": "261aa0c114e2603d",
+  "run_id": "20261126T083707-6cef",
+  "written_at": "2026-11-26T08:37:20+00:00",
+  "duration_sec": 3.72,
   "text": "ሐሙስ ጠዋት፣ መርከቡ ያለ እርሱ ተነሣ።",
   "model": "gemini-3.1-flash-tts-preview",
-  "latency_sec": 3.993,
-  "asr_text": "ሃሙስ ጠዋት መርከቡ ያለ እርሱ ተነሳ።",
-  "asr_similarity": 0.889
+  "latency_sec": 12.435
 }

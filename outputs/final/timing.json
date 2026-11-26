@@ -2,23 +2,23 @@
   {
     "id": "s01",
     "start": 0.0,
-    "duration": 8.66,
-    "narration_sec": 7.76,
+    "duration": 8.3,
+    "narration_sec": 7.4,
     "voice_at": 0.4
   },
   {
     "id": "s02",
-    "start": 8.66,
+    "start": 8.3,
     "duration": 6,
-    "narration_sec": 4.2,
-    "voice_at": 9.06
+    "narration_sec": 4.56,
+    "voice_at": 8.7
   },
   {
     "id": "s03",
-    "start": 14.66,
-    "duration": 7.22,
-    "narration_sec": 6.32,
-    "voice_at": 15.06
+    "start": 14.3,
+    "duration": 7.58,
+    "narration_sec": 6.68,
+    "voice_at": 14.7
   },
   {
     "id": "s04",
@@ -31,56 +31,56 @@
     "id": "s05",
     "start": 27.82,
     "duration": 5,
-    "narration_sec": 3.92,
+    "narration_sec": 3.96,
     "voice_at": 28.22
   },
   {
     "id": "s06",
     "start": 32.82,
     "duration": 7,
-    "narration_sec": 5.68,
+    "narration_sec": 5.76,
     "voice_at": 33.22
   },
   {
     "id": "s07",
     "start": 39.82,
-    "duration": 6.1,
-    "narration_sec": 5.2,
+    "duration": 6.3,
+    "narration_sec": 5.4,
     "voice_at": 40.22
   },
   {
     "id": "s08",
-    "start": 45.92,
+    "start": 46.12,
     "duration": 6,
-    "narration_sec": 3.88,
-    "voice_at": 46.32
+    "narration_sec": 3.72,
+    "voice_at": 46.52
   },
   {
     "id": "s09",
-    "start": 51.92,
-    "duration": 10.66,
-    "narration_sec": 9.76,
-    "voice_at": 52.32
+    "start": 52.12,
+    "duration": 9.86,
+    "narration_sec": 8.96,
+    "voice_at": 52.52
   },
   {
     "id": "s10",
-    "start": 62.58,
+    "start": 61.98,
     "duration": 7,
-    "narration_sec": 5.76,
-    "voice_at": 62.98
+    "narration_sec": 5.6,
+    "voice_at": 62.38
   },
   {
     "id": "s11",
-    "start": 69.58,
+    "start": 68.98,
     "duration": 7,
-    "narration_sec": 4.72,
-    "voice_at": 69.98
+    "narration_sec": 4.64,
+    "voice_at": 69.38
   },
   {
     "id": "s12",
-    "start": 76.58,
+    "start": 75.98,
     "duration": 8,
-    "narration_sec": 6.88,
-    "voice_at": 76.98
+    "narration_sec": 6.96,
+    "voice_at": 76.38
   }
 ]

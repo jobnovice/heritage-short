@@ -1,11 +1,9 @@
 {
-  "input_hash": "6036bbe8d02850d0",
-  "run_id": "20261125T235132-7263",
-  "written_at": "2026-11-25T23:54:09+00:00",
-  "duration_sec": 5.68,
+  "input_hash": "bc439b6cc9780272",
+  "run_id": "20261126T083413-7f3f",
+  "written_at": "2026-11-26T08:34:51+00:00",
+  "duration_sec": 5.76,
   "text": "እንደ ልጁ የሚወደው አዛዡ፣ «አንተ እዚሁ ቆይ፤ እረፍ» አለው።",
   "model": "gemini-3.1-flash-tts-preview",
-  "latency_sec": 5.623,
-  "asr_text": "እንድልጁ የሚወደው አዛዙ አንተ እዚሁ ቆይ እረፍ አለው።",
-  "asr_similarity": 0.926
+  "latency_sec": 9.013
 }

@@ -1,11 +1,9 @@
 {
-  "input_hash": "27a5ce1921cc1aa6",
-  "run_id": "20261125T235132-7263",
-  "written_at": "2026-11-25T23:55:21+00:00",
-  "duration_sec": 9.76,
+  "input_hash": "db409a0051d4cbcc",
+  "run_id": "20261126T083413-7f3f",
+  "written_at": "2026-11-26T08:35:31+00:00",
+  "duration_sec": 8.96,
   "text": "በዚያው ሐሙስ፣ የኤርትራ ተዋጊዎች ባደረሱት ጥቃት መርከቡ ሰጠመ። ጓደኞቹም አዛዡም በባሕሩ ቀሩ።",
   "model": "gemini-3.1-flash-tts-preview",
-  "latency_sec": 6.501,
-  "asr_text": "",
-  "asr_similarity": null
+  "latency_sec": 7.468
 }

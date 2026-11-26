@@ -1,11 +1,9 @@
 {
-  "input_hash": "d9d79dd22332f655",
-  "run_id": "20261125T235132-7263",
-  "written_at": "2026-11-25T23:52:43+00:00",
-  "duration_sec": 6.32,
+  "input_hash": "e9e338b1cdd7fa7c",
+  "run_id": "20261126T083413-7f3f",
+  "written_at": "2026-11-26T08:34:31+00:00",
+  "duration_sec": 6.68,
   "text": "ሐሙስ ግን መርከቡ ወደ ምጽዋ ይጓዛል። ለእርሱ ምጽዋ እንደ ገነት ነበረች።",
   "model": "gemini-3.1-flash-tts-preview",
-  "latency_sec": 5.96,
-  "asr_text": "ሃሙስከን መርከቡ ወደ ምጽዋ ይጓዛል ለእርሱ ምጽዋ እንደ ገነት ነበረች",
-  "asr_similarity": 0.943
+  "latency_sec": 6.642
 }
