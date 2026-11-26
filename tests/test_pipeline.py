@@ -51,6 +51,7 @@ def test_semantic_check_rejects_unknown_character(sb):
 
 # ---------------------------------------------------------------- caching: only the edited shot changes
 def test_editing_one_line_changes_only_that_narration_key(sb):
+    sb["voice"]["take"] = "per_line"  # the single-take case is tested below
     before = {s["id"]: N.narration_key(sb, s) for s in sb["shots"]}
     edited = copy.deepcopy(sb)
     edited["shots"][4]["narration"]["am"] += " ።"
