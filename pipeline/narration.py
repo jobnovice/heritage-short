@@ -108,6 +108,12 @@ def verify(sb: dict, shot: dict, wav: Path) -> dict:
     return {"asr_text": heard, "asr_similarity": sim}
 
 
+def narration_key(sb, shot) -> str:
+    v = sb["voice"]
+    return input_hash(v["provider"], v.get("model") or P.gemini_tts_model(), v["voice_name"], v["style_instruction"],
+                      shot["narration"]["am"])
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", nargs="*", help="shot ids to consider")
@@ -126,7 +132,7 @@ def main(argv=None):
         if a.only and s["id"] not in a.only:
             continue
         out = d / f"{s['id']}.wav"
-        h = input_hash(v["provider"], v.get("model") or P.gemini_tts_model(), v["voice_name"], v["style_instruction"], s["narration"]["am"])
+        h = narration_key(sb, s)
         if not a.force and is_fresh(out, h):
             rep.hit(s["id"])
             continue

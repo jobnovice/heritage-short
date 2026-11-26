@@ -93,6 +93,52 @@ def save_png(raw: bytes, path) -> None:
     Image.open(io.BytesIO(raw)).convert("RGB").save(path, "PNG")
 
 
+KF = OUT / "keyframes"
+
+
+def front_ref(name):
+    """Head-and-shoulders crop of the sheet's front view. The whole 3-view sheet made klein draw three
+    copies of the man (E11); a full-body crop leaked the pose (E12)."""
+    sheet, ref = KF / f"sheet_{name}.png", KF / f"ref_{name}.png"
+    if sheet.exists():
+        im = Image.open(sheet)
+        w, h = im.size
+        im.crop((0, 0, w // 3, int(h * 0.42))).save(ref)
+    return ref
+
+
+def refs_for(sb, shot):
+    """Refs for one job. Characters can opt out (the commander stays generic); an older self is drawn
+    from the younger self's face; people-free shots get a ref only if the shot names one (s01's ship
+    leaked into s09)."""
+    if shot is None:
+        return []
+    if "_sheet_of" in shot:
+        src = sb["characters"][shot["_sheet_of"]].get("reference_from")
+        return [front_ref(src)] if src else []
+    if shot["characters"]:
+        return [front_ref(c) for c in shot["characters"][:2] if sb["characters"][c].get("use_reference", True)]
+    return [ROOT / shot["reference"]] if shot.get("reference") else []
+
+
+def jobs(sb, sheets_only=False):
+    out = []
+    for name, c in sb["characters"].items():
+        body = (f"character reference sheet of {c['description']}, three views side by side: front, three-quarter, "
+                f"profile, neutral plain background, full upper body")
+        out.append((f"sheet_{name}", body, c["seed"], {"_sheet_of": name}))
+    if not sheets_only:
+        for s in sb["shots"]:
+            out.append((s["id"], s["image_prompt"], shot_seed(sb, s), s))
+    return out
+
+
+def job_hash(sb, prompt, seed, refs):
+    st = sb["style"]
+    return input_hash(prompt, seed, st.get("keyframe_provider"), st.get("keyframe_model"), st.get("keyframe_size"),
+                      [file_hash(r) for r in refs])
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", nargs="*")
@@ -101,43 +147,11 @@ def main(argv=None):
     ap.add_argument("--force", action="store_true")
     a = ap.parse_args(argv)
     sb = load_storyboard()
-    d = ensure_dir(OUT / "keyframes")
+    d = ensure_dir(KF)
     rep = StageReport("keyframes")
 
-    def front_ref(name):
-        """Left third of the sheet (the front view). Passing the whole 3-view sheet made klein draw
-        three copies of the man (EXPERIMENTS E11)."""
-        sheet, ref = d / f"sheet_{name}.png", d / f"ref_{name}.png"
-        if sheet.exists():
-            im = Image.open(sheet)
-            w, h = im.size
-            im.crop((0, 0, w // 3, int(h * 0.42))).save(ref)  # head+shoulders: identity without the pose (E12)
-        return ref
-
-    def refs_for(shot):
-        """Front-view refs of the shot's characters (unless a character opts out, e.g. the commander,
-        who must stay a generic silhouette). People-free shots get a ref only if the shot names one:
-        a whole-image style ref leaked content (the s01 ship appeared in s09)."""
-        if shot is None:
-            return []
-        if "_sheet_of" in shot:  # an older self is drawn from the younger self's face (review: skin tone drifted)
-            src = sb["characters"][shot["_sheet_of"]].get("reference_from")
-            return [front_ref(src)] if src else []
-        if shot["characters"]:
-            return [front_ref(c) for c in shot["characters"][:2] if sb["characters"][c].get("use_reference", True)]
-        return [ROOT / shot["reference"]] if shot.get("reference") else []
-
-    jobs = []
-    for name, c in sb["characters"].items():
-        body = (f"character reference sheet of {c['description']}, three views side by side: front, three-quarter, "
-                f"profile, neutral plain background, full upper body")
-        jobs.append((f"sheet_{name}", body, c["seed"], {"_sheet_of": name}))
-    if not a.sheets_only:
-        for s in sb["shots"]:
-            jobs.append((s["id"], s["image_prompt"], shot_seed(sb, s), s))
-
-    for key, body, seed, shot in jobs:
-        refs = [r for r in refs_for(shot) if r.exists()]
+    for key, body, seed, shot in jobs(sb, a.sheets_only):
+        refs = [r for r in refs_for(sb, shot) if r.exists()]
         if a.only and key not in a.only:
             continue
         prompt = full_prompt(sb, body)
@@ -148,9 +162,7 @@ def main(argv=None):
                 save_png(raw, cd / f"{key}_seed{seed + 100 * k}.png")
             continue
         out = d / f"{key}.png"
-        st = sb["style"]
-        h = input_hash(prompt, seed, st.get("keyframe_provider"), st.get("keyframe_model"), st.get("keyframe_size"),
-                       [file_hash(r) for r in refs])
+        h = job_hash(sb, prompt, seed, refs)
         if not a.force and is_fresh(out, h):
             rep.hit(key)
             continue

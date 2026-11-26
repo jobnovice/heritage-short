@@ -50,6 +50,10 @@ def from_clip(clip, out, dur: float) -> None:
            "-t", f"{dur}", "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", str(out))
 
 
+def shot_key(kf_hash: str, source: str, dur: float) -> str:
+    return input_hash(code_hash(sys.modules[__name__]), kf_hash, source, dur)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", nargs="*")
@@ -73,7 +77,7 @@ def main(argv=None):
         use_clip = s["motion"].get("use_video") and clip.exists() and manifest.get(s["id"], {}).get("keyframe_hash") == kf_h
         source = f"wan:{file_hash(clip)}" if use_clip else f"kenburns:{s['motion']['camera']}"
         out = d / f"{s['id']}.mp4"
-        h = input_hash(me, kf_h, source, dur)
+        h = shot_key(kf_h, source, dur)
         if is_fresh(out, h):
             rep.hit(s["id"])
             continue
