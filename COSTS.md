@@ -7,29 +7,29 @@ The table below is generated from `runs.jsonl` by `make costs`; do not edit it b
 <!-- AUTO:START -->
 | stage | provider | model | calls | ok | errors | median latency s | total s | GPU min | list-price USD |
 |---|---|---|---|---|---|---|---|---|---|
-| assemble | ffmpeg | mix | 8 | 8 | 0 | 24.71 | 194.7 | 0.0 | 0.0000 |
-| assemble | ffmpeg | render | 17 | 17 | 0 | 90.14 | 1209.1 | 0.0 | 0.0000 |
+| assemble | ffmpeg | mix | 10 | 10 | 0 | 24.97 | 244.7 | 0.0 | 0.0000 |
+| assemble | ffmpeg | render | 22 | 22 | 0 | 97.60 | 1960.3 | 0.0 | 0.0000 |
 | benchmark | addis | addis_default | 6 | 6 | 0 | 4.21 | 25.8 | 0.0 | 0.0000 |
 | benchmark | edge | edge_ameha | 6 | 6 | 0 | 2.81 | 30.6 | 0.0 | 0.0000 |
 | keyframes | cloudflare | @cf/black-forest-labs/flux-1-schnell | 2 | 0 | 2 | 0.00 | 0.0 | 0.0 | 0.0000 |
-| keyframes | cloudflare | @cf/black-forest-labs/flux-2-klein-4b | 50 | 48 | 2 | 6.64 | 392.4 | 0.0 | 0.0528 |
+| keyframes | cloudflare | @cf/black-forest-labs/flux-2-klein-4b | 58 | 56 | 2 | 6.87 | 453.9 | 0.0 | 0.0616 |
 | keyframes | pollinations | flux | 8 | 6 | 2 | 3.06 | 499.9 | 0.0 | 0.0000 |
-| music | qenet | qenet-composer-v1 | 10 | 10 | 0 | 4.80 | 49.7 | 0.0 | 0.0000 |
+| music | qenet | qenet-composer-v1 | 11 | 11 | 0 | 5.88 | 55.8 | 0.0 | 0.0000 |
 | narration | addis | addis-ai-tts-v1 | 22 | 22 | 0 | 3.91 | 88.5 | 0.0 | 0.0000 |
-| narration | gemini | gemini-3.8-flash-tts | 57 | 15 | 42 | 17.86 | 1027.2 | 0.0 | 0.0225 |
+| narration | gemini | gemini-3.8-flash-tts | 58 | 16 | 42 | 17.88 | 1047.5 | 0.0 | 0.0240 |
 | narration | gemini | gemini-3.8-flash-lite-tts | 26 | 6 | 20 | 17.98 | 319.0 | 0.0 | 0.0090 |
 | narration | gemini | gemini-2.5-flash-preview-tts | 14 | 9 | 5 | 6.86 | 150.0 | 0.0 | 0.0135 |
 | narration | gemini | gemini-3.1-flash-tts-preview | 25 | 24 | 1 | 6.57 | 234.9 | 0.0 | 0.0360 |
-| narration_verify | gemini | gemini-2.5-flash | 22 | 18 | 4 | 3.88 | 85.1 | 0.0 | 0.0036 |
-| narration_verify | gemini | gemini-3.5-transcribe | 34 | 20 | 14 | 2.71 | 80.9 | 0.0 | 0.0040 |
-| shots | ffmpeg | zoompan | 49 | 49 | 0 | 3.49 | 191.8 | 0.0 | 0.0000 |
+| narration_verify | gemini | gemini-2.5-flash | 34 | 29 | 5 | 3.88 | 85.1 | 0.0 | 0.0058 |
+| narration_verify | gemini | gemini-3.5-transcribe | 46 | 27 | 19 | 2.98 | 129.5 | 0.0 | 0.0054 |
+| shots | ffmpeg | zoompan | 55 | 55 | 0 | 3.55 | 228.3 | 0.0 | 0.0000 |
 
-Total logged model/tool calls: 356 (+64 stage summaries). Actual spend: $0.00 (all free tiers).
+Total logged model/tool calls: 403 (+80 stage summaries). Actual spend: $0.00 (all free tiers).
 
 | failure class | count |
 |---|---|
 | 402 free limit | 2 |
-| 429 quota/rate | 75 |
+| 429 quota/rate | 81 |
 | flagged (3030) | 2 |
 | other | 6 |
 | rejected_too_long | 7 |
