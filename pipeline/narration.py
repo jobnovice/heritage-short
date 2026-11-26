@@ -1,10 +1,13 @@
-"""Stage: narration. One WAV per shot, so a re-take of one line costs one TTS call.
+"""Stage: narration. One WAV per shot.
 
     python -m pipeline.narration [--only s05] [--force]
 
-Cache key = (provider, model, voice, style instruction, Amharic line). Changing any of these for a
-shot regenerates only that shot. Output: outputs/narration/<id>.wav (24 kHz mono) + .meta.json
-holding the measured duration that the edit uses to time the picture.
+voice.take = "per_line": one TTS call per shot; cache key = (provider, model, voice, style, line), so a
+re-take of one line costs one call. Separate takes drift in pitch and pace, though (E16: 112-174 Hz).
+voice.take = "single": the whole script in ONE call (one performance, one voice), split back into
+lines at pauses by dynamic programming; the key covers every line, so any edit re-records the take
+(still one call). Output: outputs/narration/<id>.wav (24 kHz mono) + .meta.json with the duration
+the edit uses to time the picture.
 """
 from __future__ import annotations
 
@@ -14,6 +17,8 @@ import difflib
 import re
 import wave
 from pathlib import Path
+
+import numpy as np
 
 from . import providers as P
 from .common import (OUT, QuotaExhausted, RetryableError, read_meta, StageReport, ensure_dir, input_hash, is_fresh, load_storyboard,
@@ -110,8 +115,87 @@ def verify(sb: dict, shot: dict, wav: Path) -> dict:
 
 def narration_key(sb, shot) -> str:
     v = sb["voice"]
+    text = shot["narration"]["am"]
+    if v.get("take") == "single":  # every shot shares the take, so the key covers every line
+        text = [s["narration"]["am"] for s in sb["shots"]]
     return input_hash(v["provider"], v.get("model") or P.gemini_tts_model(), v["voice_name"], v["style_instruction"],
-                      shot["narration"]["am"])
+                      text)
+
+
+def split_take(pcm: bytes, texts: list[str], sr: int = SR) -> list[bytes]:
+    """Cut one continuous take into len(texts) lines. Pauses between lines (0.7-1.5 s) are not reliably
+    longer than pauses inside them, so 'the N-1 longest gaps' fails (E16). Instead: every silence
+    >= 0.25 s is a candidate cut, and dynamic programming picks the N-1 cuts whose segment lengths best
+    match each line's expected length (its character share of the take), with a small bonus for long gaps."""
+    x = np.frombuffer(pcm, dtype="<i2").astype(np.float32) / 32768
+    hop = sr // 100
+    env = np.sqrt(np.add.reduceat(x[: len(x) // hop * hop] ** 2, np.arange(0, len(x) // hop * hop, hop)) / hop)
+    db = 20 * np.log10(env + 1e-9)
+    sil = db < db.max() - 40
+    runs, i = [], 0
+    while i < len(sil):
+        if sil[i]:
+            j = i
+            while j < len(sil) and sil[j]:
+                j += 1
+            if i > 0 and j < len(sil) and j - i >= 25:
+                runs.append((i, j))
+            i = j
+        else:
+            i += 1
+    n, T = len(texts), len(sil) / 100
+    if len(runs) < n - 1:
+        raise RetryableError(f"take has {len(runs)} pauses, need {n - 1}")
+    pts = [0.0] + [(a + b) / 200 for a, b in runs] + [T]
+    gap = [0.0] + [(b - a) / 100 for a, b in runs] + [0.0]
+    chars = np.array([len(t.replace(" ", "")) for t in texts], float)
+    exp = chars / chars.sum() * T
+    C = len(pts) - 1
+    best = {(0, 0): (0.0, None)}
+    for k in range(1, n + 1):
+        for j in ([C] if k == n else range(1, C)):
+            opts = [(c + ((pts[j] - pts[p]) / exp[k - 1] - 1) ** 2 - 0.3 * gap[j], p)
+                    for (kk, p), (c, _) in best.items() if kk == k - 1 and p < j]
+            if opts:
+                best[(k, j)] = min(opts)
+    cuts, j = [C], C
+    for k in range(n, 0, -1):
+        j = best[(k, j)][1]
+        cuts.append(j)
+    cuts = [pts[j] for j in reversed(cuts)]
+    out, pad = [], int(0.06 * sr)
+    for a, b in zip(cuts, cuts[1:]):
+        seg = (x[int(a * sr): int(b * sr)] * 32768).astype("<i2")
+        loud = np.where(np.abs(seg) > 0.01 * 32768)[0]
+        if len(loud):
+            seg = seg[max(0, loud[0] - pad): loud[-1] + pad]
+        out.append(seg.tobytes())
+    return out
+
+
+def single_take(sb: dict, d: Path, rep: StageReport, force: bool) -> None:
+    shots = sb["shots"]
+    h = narration_key(sb, shots[0])
+    if not force and all(is_fresh(d / f"{s['id']}.wav", h) for s in shots):
+        for s in shots:
+            rep.hit(s["id"])
+        return
+    texts = [s["narration"]["am"] for s in shots]
+    try:
+        # a blank line between lines invites a clear pause; the guard scales with the whole script
+        pcm, info = synth(sb, "\n\n".join(texts), "take")
+    except QuotaExhausted as e:
+        for s in shots:
+            rep.fallback(s["id"], f"TTS unavailable: {e}"[:200])
+        return
+    take = d / "_take.wav"
+    write_wav(take, pcm)
+    write_meta(take, h, duration_sec=round(len(pcm) / 2 / SR, 3), **info)
+    for s, seg in zip(shots, split_take(pcm, texts)):
+        out = d / f"{s['id']}.wav"
+        dur = write_wav(out, seg)
+        write_meta(out, h, duration_sec=dur, text=s["narration"]["am"], take="single", **info)
+        rep.miss(s["id"], f"{dur:.2f}s")
 
 
 def main(argv=None):
@@ -128,7 +212,9 @@ def main(argv=None):
     d = ensure_dir(OUT / a.outdir)
     rep = StageReport("narration")
     v = sb["voice"]
-    for s in sb["shots"]:
+    if v.get("take") == "single":
+        single_take(sb, d, rep, a.force)
+    for s in ([] if v.get("take") == "single" else sb["shots"]):
         if a.only and s["id"] not in a.only:
             continue
         out = d / f"{s['id']}.wav"

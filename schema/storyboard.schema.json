@@ -58,6 +58,8 @@
         "fallback_models": {"type": "array", "items": {"type": "string"}, "description": "Tried in order when the primary model's daily quota is gone"},
         "voice_name": {"type": "string"},
         "style_instruction": {"type": "string"},
+        "take": {"enum": ["per_line", "single"], "default": "per_line",
+                 "description": "single = all lines in one TTS call, split at pauses: one performance, one consistent voice (E16); per_line = one call per shot"},
         "lead_in_sec": {"type": "number", "minimum": 0, "default": 0.4},
         "tail_sec": {"type": "number", "minimum": 0, "default": 0.6}
       }

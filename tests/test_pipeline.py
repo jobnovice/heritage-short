@@ -174,3 +174,24 @@ def test_qenet_composer_is_deterministic_and_respects_silence(sb):
     nxt = sorted(starts[c["starts_at_shot"]] for c in sb["music"]["cues"] if starts[c["starts_at_shot"]] > starts[silence["starts_at_shot"]])[0]
     mid = int(((starts[silence["starts_at_shot"]] + 2.5 + nxt) / 2) * M.SR)
     assert np.abs(a[mid - 2000:mid + 2000]).max() < 0.02, "the loss cue should be (near) silent"
+
+
+def test_single_take_split_ignores_pauses_inside_lines():
+    """Lines of 2 s, 1 s, 3 s; line 3 has a 0.9 s pause inside it, longer than the 0.6 s between lines.
+    'Cut at the longest gaps' would split line 3; the length-matching DP must not."""
+    sr = 24000
+    tone = lambda sec: (0.3 * np.sin(np.arange(int(sec * sr)) * 2 * np.pi * 150 / sr) * 32767).astype("<i2")
+    gap = lambda sec: np.zeros(int(sec * sr), "<i2")
+    pcm = np.concatenate([tone(2), gap(.6), tone(1), gap(.6), tone(1.5), gap(.9), tone(1.5)]).tobytes()
+    segs = N.split_take(pcm, ["aaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"], sr)
+    durs = [len(s) / 2 / sr for s in segs]
+    assert len(segs) == 3 and abs(durs[0] - 2.1) < .1 and abs(durs[1] - 1.1) < .1 and abs(durs[2] - 4.0) < .15
+
+
+def test_single_take_key_changes_for_every_shot_when_one_line_changes(sb):
+    sb["voice"]["take"] = "single"
+    before = {s["id"]: N.narration_key(sb, s) for s in sb["shots"]}
+    sb2 = copy.deepcopy(sb)
+    sb2["shots"][3]["narration"]["am"] += " ።"
+    after = {s["id"]: N.narration_key(sb2, s) for s in sb2["shots"]}
+    assert len(set(before.values())) == 1 and all(before[k] != after[k] for k in before)
