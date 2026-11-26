@@ -1,12 +1,13 @@
 {
-  "input_hash": "4841f7cf67f0cbdf",
-  "run_id": "20261125T235724-7ad7",
-  "written_at": "2026-11-25T23:58:22+00:00",
+  "input_hash": "4e0d8319dd24c2cb",
+  "run_id": "20261126T114317-77c0",
+  "written_at": "2026-11-26T11:43:17+00:00",
   "provider": "cloudflare",
   "model": "@cf/black-forest-labs/flux-2-klein-4b",
-  "seed": 4111,
-  "prompt": "a slim Ethiopian man in his early twenties, dark brown skin, short cropped black hair, clean-shaven, light blue navy work shirt with rolled sleeves, dark navy trousers with his arm in a white sling, sitting alone on a bench at a naval base at early morning, holding a small transistor radio to his ear, stunned, eyes wet, first sunlight on his face. hand-painted gouache illustration, visible brush strokes, soft paper grain, muted palette of Red Sea teal, rust red and warm ochre, gentle cinematic light, main subject centered in frame, late 1980s Ethiopia, no text, no lettering",
+  "seed": 4211,
+  "prompt": "a slim Ethiopian man in his early twenties, dark brown skin, short cropped black hair, clean-shaven, light blue navy work shirt with rolled sleeves, dark navy trousers with his right arm in a white sling, sitting alone on a bench at a naval base at early morning, pressing one boxy old 1980s transistor radio with a long telescopic antenna against his left ear with his left hand, only one radio in the picture, stunned, eyes wet, first sunlight on his face. hand-painted gouache illustration, visible brush strokes, soft paper grain, muted palette of Red Sea teal, rust red and warm ochre, gentle cinematic light, main subject centered in frame, late 1980s Ethiopia, no text, no lettering",
   "refs": [
     "ref_uncle_young.png"
-  ]
+  ],
+  "promoted_from": "candidates/s10_seed4211.png"
 }

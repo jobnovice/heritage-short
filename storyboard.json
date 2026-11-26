@@ -188,7 +188,7 @@
       "characters": [
         "uncle_young"
       ],
-      "image_prompt": "{uncle_young} falling backwards inside a ship's narrow steel corridor, one foot slipping off a wet ladder rung, body tilted in mid-fall, arms flung out, startled face clearly visible, water on the steel floor, dramatic low light, single figure",
+      "image_prompt": "side view of {uncle_young} slipping and falling backwards off a wet steel ladder inside a ship, his feet sliding out from under him, body tilted back towards the floor, one hand grabbing at the rail, startled face in profile, water splashing on the steel floor, dramatic low light, single figure",
       "motion": {
         "camera": "tilt_down",
         "video_prompt": "his foot slides off the rung and he falls, droplets scatter",
@@ -197,7 +197,8 @@
       "narration": {
         "am": "ማክሰኞ ዕለት፣ በመርከቡ ውስጥ ሲሠራ፣ እግሩ ተንሸራተተ።",
         "en": "On Tuesday, while working inside the ship, his foot slipped."
-      }
+      },
+      "seed": 4105
     },
     {
       "id": "s05",
@@ -307,7 +308,7 @@
       "characters": [
         "uncle_young"
       ],
-      "image_prompt": "{uncle_young} with his right arm in a white sling, sitting alone on a bench at a naval base at early morning, holding one single small transistor radio in his left hand against his left ear, only one radio in the picture, stunned, eyes wet, first sunlight on his face",
+      "image_prompt": "{uncle_young} with his right arm in a white sling, sitting alone on a bench at a naval base at early morning, pressing one boxy old 1980s transistor radio with a long telescopic antenna against his left ear with his left hand, only one radio in the picture, stunned, eyes wet, first sunlight on his face",
       "motion": {
         "camera": "push_in",
         "video_prompt": "he lowers the radio slowly, sunlight grows, gentle push in",
@@ -316,7 +317,8 @@
       "narration": {
         "am": "ዓርብ ዕለት ዜናውን ሰማ። ያንን ቀን፣ ዳግም የተወለደበት ቀን ይለዋል።",
         "en": "On Friday, he heard the news. He calls it the day he was born again."
-      }
+      },
+      "seed": 4211
     },
     {
       "id": "s11",

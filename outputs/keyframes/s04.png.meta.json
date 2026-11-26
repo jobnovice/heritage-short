@@ -1,10 +1,13 @@
 {
-  "input_hash": "5c1bda9ec77196b4",
-  "run_id": "20261125T225013-4388",
-  "written_at": "2026-11-25T22:50:23+00:00",
+  "input_hash": "78be3f79c8266de2",
+  "run_id": "20261126T114317-77c0",
+  "written_at": "2026-11-26T11:43:17+00:00",
   "provider": "cloudflare",
   "model": "@cf/black-forest-labs/flux-2-klein-4b",
-  "seed": 9004,
-  "prompt": "close view of a worn black work boot slipping on a wet steel ladder rung inside a ship, water droplets, dramatic low light. hand-painted gouache illustration, visible brush strokes, soft paper grain, muted palette of Red Sea teal, rust red and warm ochre, gentle cinematic light, main subject centered in frame, late 1980s Ethiopia, no text, no lettering",
-  "refs": []
+  "seed": 4105,
+  "prompt": "side view of a slim Ethiopian man in his early twenties, dark brown skin, short cropped black hair, clean-shaven, light blue navy work shirt with rolled sleeves, dark navy trousers slipping and falling backwards off a wet steel ladder inside a ship, his feet sliding out from under him, body tilted back towards the floor, one hand grabbing at the rail, startled face in profile, water splashing on the steel floor, dramatic low light, single figure. hand-painted gouache illustration, visible brush strokes, soft paper grain, muted palette of Red Sea teal, rust red and warm ochre, gentle cinematic light, main subject centered in frame, late 1980s Ethiopia, no text, no lettering",
+  "refs": [
+    "ref_uncle_young.png"
+  ],
+  "promoted_from": "candidates/s04_seed4105.png"
 }
