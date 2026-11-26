@@ -63,7 +63,8 @@ def mix(sb, voice: Path, out: Path, total: float) -> dict:
         f"[1:a]aresample=48000,loudnorm=I=-23:TP=-4[mu];"
         f"[2:a]aresample=48000,volume=0.35[sea];"
         f"[mu][vk]{duck}[md];"
-        f"[vm][md][sea]amix=inputs=3:normalize=0:duration=first,atrim=0:{total:.2f}[mix]"
+        f"[vm][md][sea]amix=inputs=3:normalize=0:duration=first,atrim=0:{total:.2f},"
+        f"alimiter=limit=0.5:attack=5:release=80:level=0[mix]"  # tame speech peaks so the final linear gain fits under -1 dBTP
     )
     pre = out.with_name("premix.wav")
     ffmpeg("-i", str(voice), "-i", str(OUT / "music" / "score.wav"), "-i", str(OUT / "music" / "sea.wav"),
