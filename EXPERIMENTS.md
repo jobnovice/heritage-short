@@ -63,12 +63,30 @@ the `.meta.json` sidecars under `outputs/`. Times are EAT, 26 Nov 2026.
 - **Result:** `cached=2` and a stale, still-broken video (F4). After adding `code_hash()` of the stage's source: regenerate once, then `cached=2` in 0.0 s.
 - **Decision:** all deterministic stages (music, shots, assemble) hash their own source code.
 
-### E9 - Score candidates: which qenet seed under the narration
-- [TO RUN: `python -m pipeline.music --candidates 3`, listen at low volume under the radio cut, write which seed and why.]
+### E9 - Score candidates: which qenet seed sits best under the narration
+- **Hypothesis:** the seeds differ only in ornament and timing, but that is enough to change how much the score competes with the voice.
+- **Change:** `python -m pipeline.music --candidates 3` (seeds 7, 8, 9, same cues and theme), each measured against the real narration track: energy in the voice band (300-3000 Hz) during speech frames (masking risk), note onsets per minute (busyness), overall RMS.
+- **Result:**
 
-### E10 - Ducking settings
-- Starting point from the brief: threshold 0.02, ratio 6, attack 300 ms, release 1500 ms. Radio cut master: -14.09 LUFS, -1.0 dBTP.
-- [TO RUN: compare release 1500 vs 800 ms by ear on phone + headphones; record the choice.]
+  | seed | voice-band energy under speech | onsets / min | RMS |
+  |---|---|---|---|
+  | 7 (previous) | 4.705 | 40.0 | -23.0 dB |
+  | **8** | **4.318** | 31.2 | -23.5 dB |
+  | 9 | 4.706 | 24.4 | -23.2 dB |
+
+- **Decision:** seed 8: about 8% less energy in the voice band while the narrator speaks, at a medium density (seed 9 is sparser but masks as much as 7). The measurement replaces a listen I could not do on every candidate; a final by-ear check on phone + headphones: [FILL IN].
+
+### E10 - Ducking release: 1500 ms vs 800 ms
+- **Hypothesis:** a faster release (800 ms) lets the score breathe in the short pauses between lines; the brief's 1500 ms might keep the film too flat.
+- **Change:** same voice track and score, `sidechaincompress` threshold 0.02, ratio 6, attack 300 ms; only the release changed. Music level measured in 50 ms frames during speech, in pauses, and 0.3-1.2 s after each line ends.
+- **Result:**
+
+  | release | music under voice | in pauses | duck depth | 0.3-1.2 s after a line |
+  |---|---|---|---|---|
+  | **1500 ms** | **-41.1 dB** | -31.4 dB | 9.7 dB | **-34.7 dB** |
+  | 800 ms | -39.4 dB | -27.9 dB | 11.5 dB | -29.3 dB |
+
+- **Decision:** keep 1500 ms. 800 ms ducks deeper on paper but snaps the music back 5.4 dB louder right after each line, which with lines 1-3 s apart becomes audible pumping. 1500 ms keeps the score lower under the voice and lets it return gently, which suits a quiet, remembered story.
 
 ### E11 - The whole character sheet works as a reference image
 - **Hypothesis:** passing the full 3-view sheet gives klein the most identity information.

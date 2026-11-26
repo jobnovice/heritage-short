@@ -56,7 +56,7 @@
   },
   "music": {
     "provider": "qenet",
-    "seed": 7,
+    "seed": 8,
     "tempo_bpm": 60,
     "root_hz": 146.83,
     "caption": "instrumental, slow Ethiopian tizita ballad, solo krar and soft masenqo over a low drone, sparse, intimate, warm tape texture, no drums, no vocals",
